@@ -1,10 +1,13 @@
 import { Outlet } from "react-router"
+import { AppHeader } from "../../app-header"
 
+//main app layout
 const MainLayout = () => {
   return (
-    <div className="bg-background">
+    <>
+      <AppHeader />
       <Outlet />
-    </div>
+    </>
   )
 }
 

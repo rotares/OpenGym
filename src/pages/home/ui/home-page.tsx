@@ -1,4 +1,5 @@
-import { Button } from "@/shared/ui"
+import { NavLink } from "react-router"
+
 /**
  * Home Page
  * Route-level composition that owns its own logic
@@ -11,9 +12,7 @@ function HomePage() {
       <p className="text-lg text-muted-foreground">
         Your personal fitness companion
       </p>
-      <Button variant="default" size="lg">
-        Get Started
-      </Button>
+      <NavLink to={"/workouts-history"}>Sign In</NavLink>
     </div>
   )
 }

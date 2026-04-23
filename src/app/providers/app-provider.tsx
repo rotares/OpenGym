@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router"
+import { HeaderConfigProvider } from "./header-config-provider"
 import { ThemeProvider } from "./theme-provider"
 
 interface RouterProviderProps {
@@ -8,7 +9,9 @@ interface RouterProviderProps {
 export const AppProvider = ({ children }: RouterProviderProps) => {
   return (
     <ThemeProvider>
-      <BrowserRouter>{children}</BrowserRouter>
+      <HeaderConfigProvider>
+        <BrowserRouter>{children}</BrowserRouter>
+      </HeaderConfigProvider>
     </ThemeProvider>
   )
 }

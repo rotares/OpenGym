@@ -1,5 +1,5 @@
 import { AppProvider } from "./providers"
-import { AppRoutes } from "./routing"
+import { AppRoutes } from "./routes"
 
 import "./styles/index.css"
 
