@@ -1,12 +1,12 @@
 import { AppProvider } from "./providers"
-import { AppRoutes } from "./routes"
+import { AppRouter } from "./router"
 
 import "./styles/index.css"
 
 const App = () => {
   return (
     <AppProvider>
-      <AppRoutes />
+      <AppRouter />
     </AppProvider>
   )
 }

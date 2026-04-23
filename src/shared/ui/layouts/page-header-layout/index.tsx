@@ -1,13 +1,14 @@
-import { useHeaderContext } from "@/shared/context/header-config-context"
-import { Outlet } from "react-router"
+import { Outlet, useMatches } from "react-router"
 
-//layout for pages with header, which will use header config from context
+//layout for pages with header, which will be used in router for pages with header
 export const PageHeaderLayout = () => {
-  const { headerConfig } = useHeaderContext()
+  const matches = useMatches()
+
+  const title = matches.at(-1)?.handle?.meta?.title
 
   return (
     <>
-      <header>{headerConfig?.title}</header>
+      {title && <header>{title}</header>}
       <Outlet />
     </>
   )
