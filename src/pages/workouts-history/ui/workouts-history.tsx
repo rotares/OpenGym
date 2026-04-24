@@ -1,5 +1,20 @@
+import { useHeaderStore } from "@/shared/store/header"
+import { Button } from "@/shared/ui"
+import { useEffect } from "react"
+
 export const WorkoutsHistoryPage = () => {
-  //there will logic for dynamic hand over actions to headerConfig
+  const setHeaderConfig = useHeaderStore((state) => state.setHeaderConfig)
+
+  //set header config for page
+  useEffect(() => {
+    setHeaderConfig({
+      actions: () => (
+        <Button onClick={() => alert("add workout")}>Add workout</Button>
+      ),
+    })
+
+    return () => setHeaderConfig(null)
+  }, [setHeaderConfig])
 
   return (
     <>

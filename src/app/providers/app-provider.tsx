@@ -1,4 +1,3 @@
-import { HeaderConfigProvider } from "./header-config-provider"
 import { ThemeProvider } from "./theme-provider"
 
 interface RouterProviderProps {
@@ -6,9 +5,5 @@ interface RouterProviderProps {
 }
 
 export const AppProvider = ({ children }: RouterProviderProps) => {
-  return (
-    <ThemeProvider>
-      <HeaderConfigProvider>{children}</HeaderConfigProvider>
-    </ThemeProvider>
-  )
+  return <ThemeProvider>{children}</ThemeProvider>
 }
