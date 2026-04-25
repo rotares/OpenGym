@@ -5,7 +5,7 @@ import { MOCK_DATA } from "./mocks"
 export const exerciseService = {
   async getAll(): Promise<ExerciseType[]> {
     return new Promise((resolve) => {
-      setTimeout(() => resolve(MOCK_DATA), 1000)
+      setTimeout(() => resolve(MOCK_DATA), 2000)
     })
   },
 }
