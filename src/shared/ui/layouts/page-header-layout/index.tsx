@@ -19,11 +19,6 @@ export const PageHeaderLayout = () => {
   const title =
     (matches.at(-1)?.handle as Handle)?.meta?.title || headerConfig?.title
 
-  //if there is no header config and no title, then we can render page without header
-  if (!headerConfig && !title) {
-    return <Outlet />
-  }
-
   return (
     <>
       <header>
