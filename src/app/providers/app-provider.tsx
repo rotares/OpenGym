@@ -1,9 +1,17 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ThemeProvider } from "./theme-provider"
 
 interface RouterProviderProps {
   children: React.ReactNode
 }
 
+//tanstack client
+const queryClient = new QueryClient()
+
 export const AppProvider = ({ children }: RouterProviderProps) => {
-  return <ThemeProvider>{children}</ThemeProvider>
+  return (
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </ThemeProvider>
+  )
 }
