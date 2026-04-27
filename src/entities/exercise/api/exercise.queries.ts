@@ -6,5 +6,6 @@ export const EXERCISE_QUERIES = {
     queryOptions({
       queryKey: ["exercises"],
       queryFn: () => exerciseService.getAll(),
+      refetchOnMount: false,
     }),
 }
