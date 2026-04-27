@@ -1,4 +1,4 @@
-import { Button } from "@/shared/ui"
+import { Button } from "@/shared/ui/primitives"
 import { Link } from "react-router"
 
 /**

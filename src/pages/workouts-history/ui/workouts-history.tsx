@@ -1,5 +1,5 @@
 import { useHeaderStore } from "@/shared/store/header"
-import { Button } from "@/shared/ui"
+import { Button } from "@/shared/ui/primitives"
 import { useEffect } from "react"
 
 export const WorkoutsHistoryPage = () => {
