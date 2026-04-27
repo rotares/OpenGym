@@ -1,8 +1,8 @@
 //exercise item
 import { type ExerciseType } from "../../model/exercise-types"
 
-export const ExerciseItem = (props: ExerciseType) => {
+export const ExerciseItem = (props: Partial<ExerciseType>) => {
   const { name } = props
 
-  return <div>{name}</div>
+  return <li>{name}</li>
 }
