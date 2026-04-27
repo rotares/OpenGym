@@ -1,12 +1,12 @@
 import { Outlet } from "react-router"
-import { AppHeader } from "../../app-header"
+import { AppHeader } from "../../components/app-header"
 
 //main app layout
 const MainLayout = () => {
   return (
     <>
       <AppHeader />
-      <main>
+      <main className="mx-auto max-w-[1440px] ">
         <Outlet />
       </main>
     </>

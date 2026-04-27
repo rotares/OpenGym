@@ -5,7 +5,7 @@ import { devtools } from "zustand/middleware"
 //headerConfig
 interface HeaderConfig {
   title?: string
-  actions?: () => JSX.Element
+  actions?: (() => JSX.Element) | JSX.Element
 }
 
 interface HeaderStore {
