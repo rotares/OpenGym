@@ -6,8 +6,10 @@ const MainLayout = () => {
   return (
     <>
       <AppHeader />
-      <main className="mx-auto max-w-[1440px] ">
-        <Outlet />
+      <main className="p-4">
+        <div className="max-w-[1440px] mx-auto">
+          <Outlet />
+        </div>
       </main>
     </>
   )

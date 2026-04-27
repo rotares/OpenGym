@@ -14,7 +14,7 @@ export const AppHeader = () => {
 
   return (
     <header className="bg-primary text-white p-4">
-      <div className="flex gap-3 items-center justify-between  max-w-[1440px] mx-auto w-full">
+      <div className="flex gap-3 items-center justify-between max-w-[1440px] mx-auto w-full">
         <h1>OpenGym</h1>
         <div>{renderActions()}</div>
       </div>
