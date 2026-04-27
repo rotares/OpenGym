@@ -1,18 +1,24 @@
-import { exerciseApi } from "@/entities/exercise/api"
-import { ExerciseItem } from "@/entities/exercise/ui"
-
-import { useQuery } from "@tanstack/react-query"
+import { SearchBar } from "@/features/search-bar"
+import { useHeaderStore } from "@/shared/store/header"
+import { ExerciseManager } from "@/widgets/exercise-manager"
+import { useLayoutEffect } from "react"
 
 export const ExercisesPage = () => {
-  const { data: exercisesArr, isLoading, error } = useQuery(exerciseApi.all())
+  const setHeaderConfig = useHeaderStore((store) => store.setHeaderConfig)
 
-  if (isLoading) return <div>loading...</div>
+  useLayoutEffect(() => {
+    setHeaderConfig({
+      actions: () => <SearchBar />,
+    })
+
+    return () => {
+      setHeaderConfig(null)
+    }
+  }, [setHeaderConfig])
 
   return (
     <div>
-      {exercisesArr?.map((item) => (
-        <ExerciseItem key={item.id} {...item} />
-      ))}
+      <ExerciseManager />
     </div>
   )
 }
