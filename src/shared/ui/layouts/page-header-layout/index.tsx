@@ -15,9 +15,9 @@ export const PageHeaderLayout = () => {
   const title = (matches.at(-1)?.handle as Handle)?.meta?.title
 
   return (
-    <>
-      <header>{title && <h1>{title}</h1>}</header>
-      <Outlet />
-    </>
+      <div className="flex flex-col flex-1">
+        <header className="text-xl mb-3">{title && <h1>{title}</h1>}</header>
+        <Outlet />
+      </div>
   )
 }
