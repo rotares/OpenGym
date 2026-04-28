@@ -35,7 +35,6 @@ export const SearchBar = () => {
 
   return (
     <>
-      <div>
         {isOpen ? (
           <ButtonGroup>
             <Button onClick={onCloseHandle} variant="outline" size={"icon"}>
@@ -58,7 +57,6 @@ export const SearchBar = () => {
             <RiSearchLine />
           </Button>
         )}
-      </div>
     </>
   )
 }
