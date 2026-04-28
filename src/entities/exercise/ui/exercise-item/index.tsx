@@ -9,10 +9,20 @@ import {
 import { memo } from "react"
 import { type ExerciseType } from "../../model/exercise-types"
 
-export const ExerciseItem = memo((props: Partial<ExerciseType>) => {
-  const { name, muscle_group_id } = props
+interface ExerciseItemProps extends Pick<ExerciseType, 'name' | 'muscle_group_id'> {
+  onClick?: (args?: unknown) => void,
+}
+
+export const ExerciseItem = memo((props: ExerciseItemProps) => {
+  const { name, muscle_group_id, onClick } = props
+
+
   return (
-    <Item variant={"outline"}>
+    <Item
+      onClick={onClick}
+      className="hover:scale-101 transition-all duration-75 cursor-pointer"
+      variant={"outline"}
+    >
       <ItemMedia variant="image">
         <div className="bg-red-500 rounded-2xl h-[50px] aspect-square"></div>
       </ItemMedia>

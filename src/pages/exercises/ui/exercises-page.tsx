@@ -17,8 +17,6 @@ export const ExercisesPage = () => {
   }, [setHeaderConfig])
 
   return (
-    <div>
-      <ExerciseManager />
-    </div>
+    <ExerciseManager />
   )
 }

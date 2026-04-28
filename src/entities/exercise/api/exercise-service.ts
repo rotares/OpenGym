@@ -8,4 +8,15 @@ export const exerciseService = {
       setTimeout(() => resolve(MOCK_DATA), 2000)
     })
   },
+
+  //fix types
+  async getById(id: string): Promise<ExerciseType> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const exercise = MOCK_DATA.find((exercise) => exercise.id === id)
+        console.log(exercise)
+        resolve(exercise!)
+      }, 2000)
+    })
+  },
 }

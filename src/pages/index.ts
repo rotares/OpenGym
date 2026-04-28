@@ -1,3 +1,4 @@
+export { ExerciseDetailsPage } from "./exercise"
 export { ExercisesPage } from "./exercises"
 export { HomePage } from "./home"
 export { NotFoundPage } from "./not-found"

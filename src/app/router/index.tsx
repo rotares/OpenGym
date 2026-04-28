@@ -1,10 +1,11 @@
 import {
+  ExerciseDetailsPage,
   ExercisesPage,
   HomePage,
   NotFoundPage,
   WorkoutsHistoryPage,
 } from "@/pages"
-import { MainLayout, PageHeaderLayout } from "@/shared/ui/layouts/"
+import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/shared/ui/layouts/"
 import { createBrowserRouter, RouterProvider } from "react-router"
 
 const routeConfig = createBrowserRouter([
@@ -25,8 +26,18 @@ const routeConfig = createBrowserRouter([
           },
           {
             path: "exercises",
-            Component: ExercisesPage,
-            handle: { meta: { title: "Упражнения" } },
+            Component: ExerciseLayout,
+            children: [
+              {
+                index: true,
+                Component: ExercisesPage,
+                handle: { meta: { title: "Упражнения" } },
+              },
+              {
+                path: ":id",
+                Component: ExerciseDetailsPage,
+              },
+            ],
           },
         ],
       },

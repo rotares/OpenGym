@@ -4,8 +4,8 @@ import { type ExerciseType } from "../model/exercise-types"
 export const MOCK_DATA: Array<ExerciseType> = [
   {
     created_at: "2023-01-01T00:00:00.000Z",
-    id: "exercise-1",
-    name: "Bench Press",
+    id: "1",
+    name: "Bench Press1",
     is_custom: false,
     muscle_group_id: "1",
   },
@@ -23,7 +23,7 @@ export const MOCK_DATA: Array<ExerciseType> = [
     is_custom: false,
     muscle_group_id: "2",
   },
-  {
+{
     created_at: "2023-01-01T00:00:00.000Z",
     id: "exercise-4",
     name: "Bench Press",
