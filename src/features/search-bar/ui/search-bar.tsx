@@ -35,28 +35,28 @@ export const SearchBar = () => {
 
   return (
     <>
-        {isOpen ? (
-          <ButtonGroup>
-            <Button onClick={onCloseHandle} variant="outline" size={"icon"}>
-              <RiArrowLeftLine />
-            </Button>
-            <InputGroup>
-              <InputGroupInput
-                value={searchQuery}
-                onChange={onChangeHandle}
-                placeholder="Search..."
-              />
-            </InputGroup>
-          </ButtonGroup>
-        ) : (
-          <Button
-            variant={"outline"}
-            size={"icon"}
-            onClick={() => setIsOpen(true)}
-          >
-            <RiSearchLine />
+      {isOpen ? (
+        <ButtonGroup>
+          <Button onClick={onCloseHandle} variant="outline" size={"icon"}>
+            <RiArrowLeftLine />
           </Button>
-        )}
+          <InputGroup>
+            <InputGroupInput
+              value={searchQuery}
+              onChange={onChangeHandle}
+              placeholder="Search..."
+            />
+          </InputGroup>
+        </ButtonGroup>
+      ) : (
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          onClick={() => setIsOpen(true)}
+        >
+          <RiSearchLine />
+        </Button>
+      )}
     </>
   )
 }
