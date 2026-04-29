@@ -1,3 +1,4 @@
+import { SearchBar } from "@/features/search-bar"
 import {
   ExerciseDetailsPage,
   ExercisesPage,
@@ -5,7 +6,7 @@ import {
   NotFoundPage,
   WorkoutsHistoryPage,
 } from "@/pages"
-import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/shared/ui/layouts/"
+import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
 
 const routeConfig = createBrowserRouter([
@@ -22,7 +23,6 @@ const routeConfig = createBrowserRouter([
           {
             path: "workouts-history",
             Component: WorkoutsHistoryPage,
-            handle: { meta: { title: "История тренировок" } },
           },
           {
             path: "exercises",
@@ -31,11 +31,22 @@ const routeConfig = createBrowserRouter([
               {
                 index: true,
                 Component: ExercisesPage,
-                handle: { meta: { title: "Упражнения" } },
+                handle: {
+                  header: {
+                    title: "Упражнения",
+                    actions: <SearchBar />,
+                  },
+                },
               },
               {
                 path: ":id",
                 Component: ExerciseDetailsPage,
+                handle: {
+                  pageHeader: {
+                    title: "Упражнение",
+                    back: true,
+                  },
+                },
               },
             ],
           },
