@@ -1,9 +1,4 @@
-import {
-  Button,
-  ButtonGroup,
-  InputGroup,
-  InputGroupInput,
-} from "@/shared/ui/primitives"
+import { Button, ButtonGroup, Input } from "@/shared/ui/primitives"
 import { RiArrowLeftLine, RiSearchLine } from "@remixicon/react"
 import { useEffect, useState, type SyntheticEvent } from "react"
 import { useShallow } from "zustand/shallow"
@@ -36,22 +31,21 @@ export const SearchBar = () => {
   return (
     <>
       {isOpen ? (
-        <ButtonGroup>
-          <Button onClick={onCloseHandle} variant="outline" size={"icon"}>
+        <ButtonGroup className="">
+          <Button onClick={onCloseHandle} variant="outline" size={"icon-lg"}>
             <RiArrowLeftLine />
           </Button>
-          <InputGroup>
-            <InputGroupInput
-              value={searchQuery}
-              onChange={onChangeHandle}
-              placeholder="Search..."
-            />
-          </InputGroup>
+          <Input
+            className="h-auto"
+            value={searchQuery}
+            onChange={onChangeHandle}
+            placeholder="Search..."
+          />
         </ButtonGroup>
       ) : (
         <Button
           variant={"outline"}
-          size={"icon"}
+          size={"icon-lg"}
           onClick={() => setIsOpen(true)}
         >
           <RiSearchLine />

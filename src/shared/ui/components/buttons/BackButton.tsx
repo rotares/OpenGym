@@ -7,7 +7,7 @@ export const BackButton = () => {
   const handleClick = () => navigate(-1)
 
   return (
-    <Button onClick={handleClick} variant={"outline"} size={"icon"}>
+    <Button onClick={handleClick} variant={"outline"} size={"icon-lg"}>
       <RiArrowLeftLine />
     </Button>
   )
