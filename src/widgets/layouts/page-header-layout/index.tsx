@@ -9,14 +9,14 @@ export const PageHeaderLayout = () => {
   if (!pageHeaderConfig) return <Outlet />
 
   return (
-    <div className="flex flex-col flex-1 ">
-      <header className="text-xl mb-3 flex gap-5">
+    <>
+      <header className="text-xl mb-5 flex gap-5">
         {pageHeaderConfig?.back && <BackButton />}
         {pageHeaderConfig?.title && (
           <h1 className="self-center">{pageHeaderConfig.title}</h1>
         )}
       </header>
       <Outlet />
-    </div>
+    </>
   )
 }

@@ -11,8 +11,8 @@ const MainLayout = () => {
   return (
     <div className="flex flex-1 flex-col min-h-svh">
       <AppHeader headerConfig={headerConfig} actions={headerConfig?.actions} />
-      <main className="px-4 py-5  flex-1 flex flex-col">
-        <div className="max-w-[1440px] flex-1 flex flex-col w-full mx-auto">
+      <main className="px-4 py-[40px] flex-1 flex flex-col">
+        <div className="@md:max-w-200 flex-1  flex flex-col w-full mx-auto">
           <Outlet />
         </div>
       </main>
