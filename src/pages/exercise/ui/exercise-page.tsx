@@ -13,8 +13,10 @@ export const ExerciseDetailsPage = () => {
 
   return (
     <>
-      <ExercisePreview />
-      <ExerciseInstructions />
+      <main className="flex flex-col gap-5">
+        <ExercisePreview />
+        <ExerciseInstructions />
+      </main>
     </>
   )
 }
