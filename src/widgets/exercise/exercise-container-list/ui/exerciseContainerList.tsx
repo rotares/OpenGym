@@ -1,6 +1,5 @@
-import { exerciseApi } from "@/entities/exercise/api"
-import { ExerciseList } from "@/entities/exercise/ui"
-import { CustomSpinner } from "@/shared/ui/components/spinner"
+import { exerciseApi, ExerciseList } from "@/entities/exercise"
+import { CustomSpinner } from "@/shared/ui/components"
 import { useQuery } from "@tanstack/react-query"
 import { useCallback } from "react"
 import { useNavigate } from "react-router"

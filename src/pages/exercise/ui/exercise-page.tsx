@@ -1,4 +1,4 @@
-import { exerciseApi } from "@/entities/exercise/api"
+import { exerciseApi } from "@/entities/exercise"
 import { CustomSpinner } from "@/shared/ui/components/spinner"
 import { ExerciseInstructions, ExercisePreview } from "@/widgets/exercise"
 import { useQuery } from "@tanstack/react-query"
