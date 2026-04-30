@@ -4,10 +4,13 @@ import {
   ExercisesPage,
   HomePage,
   NotFoundPage,
+  SignInPage,
+  SignUpPage,
   WorkoutsHistoryPage,
 } from "@/pages"
 import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
+import { ProtectedRoute } from "./protectedRoute"
 
 const routeConfig = createBrowserRouter([
   {
@@ -18,35 +21,48 @@ const routeConfig = createBrowserRouter([
         Component: HomePage,
       },
       {
-        Component: PageHeaderLayout,
+        path: "sign-in",
+        Component: SignInPage,
+      },
+      {
+        path: "sign-up",
+        Component: SignUpPage,
+      },
+      {
+        Component: ProtectedRoute,
         children: [
           {
-            path: "workouts-history",
-            Component: WorkoutsHistoryPage,
-          },
-          {
-            path: "exercises",
-            Component: ExerciseLayout,
+            Component: PageHeaderLayout,
             children: [
               {
-                index: true,
-                Component: ExercisesPage,
-                handle: {
-                  header: {
-                    title: "Упражнения",
-                    actions: <SearchBar />,
-                  },
-                },
+                path: "workouts-history",
+                Component: WorkoutsHistoryPage,
               },
               {
-                path: ":id",
-                Component: ExerciseDetailsPage,
-                handle: {
-                  pageHeader: {
-                    title: "Упражнение",
-                    back: true,
+                path: "exercises",
+                Component: ExerciseLayout,
+                children: [
+                  {
+                    index: true,
+                    Component: ExercisesPage,
+                    handle: {
+                      header: {
+                        title: "Упражнения",
+                        actions: <SearchBar />,
+                      },
+                    },
                   },
-                },
+                  {
+                    path: ":id",
+                    Component: ExerciseDetailsPage,
+                    handle: {
+                      pageHeader: {
+                        title: "Упражнение",
+                        back: true,
+                      },
+                    },
+                  },
+                ],
               },
             ],
           },

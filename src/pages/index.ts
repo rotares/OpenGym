@@ -1,3 +1,4 @@
+export { SignInPage, SignUpPage } from "./auth"
 export { ExerciseDetailsPage } from "./exercise"
 export { ExercisesPage } from "./exercises"
 export { HomePage } from "./home"
