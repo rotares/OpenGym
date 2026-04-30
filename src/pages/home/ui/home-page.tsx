@@ -8,9 +8,8 @@ import { useNavigate } from "react-router"
 function HomePage() {
   const navigate = useNavigate()
   return (
-    <div className="text-center flex gap-4 flex-col items-center justify-center min-h-screen">
-      start page
-      <button onClick={() => navigate("exercises")}>Упражнения</button>
+    <div className="text-center flex gap-4 flex-col items-center justify-center ">
+      <button onClick={() => navigate("sign-up")}>Войти в аккаунт</button>
     </div>
   )
 }
