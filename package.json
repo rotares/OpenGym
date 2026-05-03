@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource-variable/instrument-sans": "^5.2.8",
+    "@hookform/resolvers": "^5.2.2",
     "@remixicon/react": "^4.9.0",
     "@supabase/supabase-js": "^2.104.0",
     "@tailwindcss/vite": "^4.2.2",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@feature-sliced/steiger-plugin": "^0.5.7",
+    "@hookform/devtools": "^4.2.0",
     "@tanstack/eslint-plugin-query": "^5.100.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
