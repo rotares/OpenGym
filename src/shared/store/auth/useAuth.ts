@@ -2,10 +2,11 @@ import { useShallow } from "zustand/shallow"
 import { useAuthStore } from "./authStore"
 
 export const useAuth = () => {
-  const { user, setUser } = useAuthStore(
+  const { user, setUser, isInitialized } = useAuthStore(
     useShallow((s) => ({
       user: s.user,
       setUser: s.setUser,
+      isInitialized: s.isInitialized,
     })),
   )
 
@@ -15,5 +16,6 @@ export const useAuth = () => {
     user,
     setUser,
     isAuth,
+    isInitialized,
   }
 }
