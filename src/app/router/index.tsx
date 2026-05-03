@@ -4,12 +4,12 @@ import {
   ExercisesPage,
   HomePage,
   NotFoundPage,
-  SignInPage,
-  SignUpPage,
   WorkoutsHistoryPage,
 } from "@/pages"
+import { AuthPage } from "@/pages/auth"
 import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
+import { GuestRoute } from "./guestRoute"
 import { ProtectedRoute } from "./protectedRoute"
 
 const routeConfig = createBrowserRouter([
@@ -21,12 +21,13 @@ const routeConfig = createBrowserRouter([
         Component: HomePage,
       },
       {
-        path: "sign-in",
-        Component: SignInPage,
-      },
-      {
-        path: "sign-up",
-        Component: SignUpPage,
+        Component: GuestRoute,
+        children: [
+          {
+            path: "auth",
+            Component: AuthPage,
+          },
+        ],
       },
       {
         Component: ProtectedRoute,
