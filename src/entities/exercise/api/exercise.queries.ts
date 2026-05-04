@@ -1,12 +1,13 @@
 import { queryOptions } from "@tanstack/react-query"
-import { exerciseService } from "./exercise-service"
+import { exerciseService } from "../api/exercise-service"
+import { type ExerciseType } from "../model/exercise-types"
 
 export const EXERCISE_QUERIES = {
   all: () => ["exercises"],
 
   lists: () => [...EXERCISE_QUERIES.all(), "list"],
   list: () =>
-    queryOptions({
+    queryOptions<ExerciseType[]>({
       queryKey: ["exercises"],
       queryFn: () => exerciseService.getAll(),
       refetchOnMount: false,
@@ -20,5 +21,3 @@ export const EXERCISE_QUERIES = {
       refetchOnMount: false,
     }),
 }
-
-

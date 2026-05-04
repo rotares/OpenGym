@@ -7,8 +7,6 @@ export const useFilteredExercises = (exercisesData: ExerciseType[]) => {
   const searchQuery = useSearchBar((state) => state.searchQuery)
 
   const filteredExercises = useMemo(() => {
-    if (!exercisesData) return null
-
     return searchQuery
       ? exercisesData.filter(({ name }) => name.includes(searchQuery))
       : exercisesData

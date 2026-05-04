@@ -10,7 +10,7 @@ export const ExerciseContainerList = () => {
   const navigate = useNavigate()
 
   const { data, isLoading, error } = useQuery(exerciseApi.list())
-  const filtered = useFilteredExercises(data)
+  const filtered = useFilteredExercises(data ?? [])
 
   const onClick = useCallback((id: string) => navigate(id), [navigate])
 
