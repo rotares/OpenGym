@@ -3,7 +3,6 @@ import { type PageHeaderConfig } from "./types"
 
 export const usePageHeaderConfig = () => {
   const matches = useMatches()
-  console.log(matches)
 
   const pageHeaderConfig: PageHeaderConfig = [...matches]
     .reverse()
