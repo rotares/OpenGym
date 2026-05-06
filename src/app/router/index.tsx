@@ -4,6 +4,7 @@ import {
   ExercisesPage,
   HomePage,
   NotFoundPage,
+  UserProfilePage,
   WorkoutsHistoryPage,
 } from "@/pages"
 import { AuthPage } from "@/pages/auth"
@@ -64,6 +65,15 @@ const routeConfig = createBrowserRouter([
                     },
                   },
                 ],
+              },
+              {
+                Component: UserProfilePage,
+                path: "profile",
+                handle: {
+                  pageHeader: {
+                    title: "Ваш профиль",
+                  },
+                },
               },
             ],
           },
