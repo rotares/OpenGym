@@ -1,11 +1,8 @@
 import { supabase } from "@/shared/api/supabaseClient"
-import { useAuth } from "@/shared/store/auth/useAuth"
+import { Button } from "@/shared/ui/primitives"
 import { useNavigate } from "react-router"
-import { Button } from "../../primitives"
-
 //global header
-export const AppHeader = ({ actions, headerConfig }) => {
-  const { isAuth } = useAuth()
+export const AppHeader = () => {
   const navigate = useNavigate()
 
   return (
@@ -14,15 +11,8 @@ export const AppHeader = ({ actions, headerConfig }) => {
         <h1 onClick={() => navigate("/")} className="text-xl cursor-pointer">
           OpenGym
         </h1>
-        {actions && <div>{actions}</div>}
-
-        {!isAuth && <Button onClick={() => navigate("/auth")}>Start</Button>}
-        {isAuth && (
-          <Button
-            onClick={async () => supabase.auth.signOut()}
-            children={"Logout"}
-          />
-        )}
+        <Button onClick={() => navigate("/auth")}>Log</Button>
+        <Button onClick={() => supabase.auth.signOut()}>Out</Button>
       </div>
     </header>
   )
