@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
-import { authApi } from "../api/authApi"
-import type { LoginDto } from "./types"
+import { authApi } from "../../api/authApi"
+import type { LoginDto } from "../types"
 
 export const useLoginMutation = () => {
   return useMutation({

@@ -1,4 +1,4 @@
-import { SignInForm, SignUpForm } from "@/features/auth-form"
+import { SignInForm, SignUpForm } from "@/features/auth"
 import {
   Tabs,
   TabsContent,
