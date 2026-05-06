@@ -1,12 +1,15 @@
-import { useAuth } from "@/shared/store/auth/useAuth"
+import { useAuth } from "@/features/auth/model/auth/useAuth"
 import { CustomSpinner } from "@/shared/ui/components"
-import { Navigate, Outlet } from "react-router"
+import { Navigate, Outlet, useLocation } from "react-router"
 
 export const GuestRoute = () => {
-  const { isInitialized, isAuth } = useAuth()
+  const { isLoading, isAuthentificated } = useAuth()
 
-  if (!isInitialized) return <CustomSpinner />
-  if (isAuth) return <Navigate to="/" />
+  const location = useLocation()
+  const redirectRoute = location?.state?.from?.pathname || "/profile"
+
+  if (isLoading) return <CustomSpinner />
+  if (isAuthentificated) return <Navigate to={redirectRoute} replace />
 
   return <Outlet />
 }

@@ -1,14 +1,15 @@
-import { useAuthStore } from "@/shared/store/auth/authStore"
-import { useAuth } from "@/shared/store/auth/useAuth"
+import { useAuth } from "@/features/auth/model/auth/useAuth"
 import { CustomSpinner } from "@/shared/ui/components"
-import { Navigate, Outlet } from "react-router"
+import { Navigate, Outlet, useLocation } from "react-router"
 
 export const ProtectedRoute = () => {
-  const isInitialized = useAuthStore((state) => state.isInitialized)
-  const { isAuth } = useAuth()
+  //using location for redirect
+  const location = useLocation()
+  const { isLoading, isAuthentificated } = useAuth()
 
-  if (!isInitialized) return <CustomSpinner />
-  if (!isAuth) return <Navigate to="/auth" replace />
+  if (isLoading) return <CustomSpinner />
+  if (!isAuthentificated)
+    return <Navigate to="/auth" state={{ from: location }} replace />
 
   return <Outlet />
 }
