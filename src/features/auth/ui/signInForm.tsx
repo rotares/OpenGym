@@ -43,7 +43,7 @@ export const SignInForm = () => {
         <FieldGroup>
           {/* custom form */}
           {fields.map((field) => (
-            <FormField control={control} {...field} />
+            <FormField key={field.name} control={control} {...field} />
           ))}
           <Field>
             <Button type="submit" variant={"outline"}>
