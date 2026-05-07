@@ -7,16 +7,23 @@ import { type RegisterDto } from "../types"
 import { useFormSettings } from "./useFormSettings"
 
 export const useSignUpForm = () => {
-  const { handleSubmit, control, setError, errors, reset } =
-    useFormSettings<FormRegisterSchemaInput>({
-      defaultValues: {
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-      },
-      schema: formRegisterSchema,
-    })
+  const {
+    handleSubmit,
+    control,
+    setError,
+    errors,
+    reset,
+    trigger,
+    clearErrors,
+  } = useFormSettings<FormRegisterSchemaInput>({
+    defaultValues: {
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+    },
+    schema: formRegisterSchema,
+  })
 
   const { mutate, isPending } = useRegisterMutation()
 
@@ -51,5 +58,7 @@ export const useSignUpForm = () => {
     control,
     errors,
     onSubmit,
+    trigger,
+    clearErrors,
   }
 }

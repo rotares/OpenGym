@@ -22,8 +22,11 @@ export const useFormSettings = <T extends FieldValues>({
     control,
     setError,
     reset,
+    trigger,
+    clearErrors
     formState: { errors },
   } = useForm<T>({
+    mode: "onSubmit",
     defaultValues,
     resolver: zodResolver(schema) as Resolver<T>,
   })
@@ -34,5 +37,7 @@ export const useFormSettings = <T extends FieldValues>({
     setError,
     errors,
     reset,
+    trigger,
+    clearErrors
   }
 }
