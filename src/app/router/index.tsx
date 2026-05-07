@@ -8,14 +8,19 @@ import {
   WorkoutsHistoryPage,
 } from "@/pages"
 import { AuthPage } from "@/pages/auth"
-import { ExerciseLayout, MainLayout, PageHeaderLayout } from "@/widgets/layouts"
+import {
+  ExerciseLayout,
+  PageHeaderLayout,
+  PrivateLayout,
+  PublicLayout,
+} from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
 import { GuestRoute } from "./guestRoute"
 import { ProtectedRoute } from "./protectedRoute"
 
 const routeConfig = createBrowserRouter([
   {
-    Component: MainLayout,
+    Component: PublicLayout,
     children: [
       {
         index: true,
@@ -30,6 +35,11 @@ const routeConfig = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+  {
+    Component: PrivateLayout,
+    children: [
       {
         Component: ProtectedRoute,
         children: [
