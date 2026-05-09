@@ -1,19 +1,24 @@
-import { supabase } from "@/shared/api/supabaseClient"
-import { Button } from "@/shared/ui/primitives"
 import { useNavigate } from "react-router"
 
+type HeaderProps = {
+  sidebarTrigger?: React.ReactNode
+  separator?: React.ReactNode
+}
+
 //global header
-export const AppHeader = () => {
+export const AppHeader = ({ sidebarTrigger, separator }: HeaderProps) => {
   const navigate = useNavigate()
 
   return (
-    <header className="flex bg-primary text-primary-foreground items-center px-6 lg:px-10 py-3">
-      <div className="flex gap-3 items-center mx-auto w-full">
+    <header className="flex sticky top-0 z-50 bg-primary text-primary-foreground items-center px-6 lg:px-8">
+      <div className="h-(--header-height) flex gap-4 items-center mx-auto w-full">
+        <div className="flex gap-3">
+          {sidebarTrigger}
+          {separator}
+        </div>
         <h1 onClick={() => navigate("/")} className="text-xl cursor-pointer">
           OpenGym
         </h1>
-        <Button onClick={() => navigate("/auth")}>Log</Button>
-        <Button onClick={() => supabase.auth.signOut()}>Out</Button>
       </div>
     </header>
   )

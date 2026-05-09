@@ -1,20 +1,32 @@
 import { AppHeader } from "@/shared/ui/components/app-header"
-import { SidebarProvider } from "@/shared/ui/primitives"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/shared/ui/primitives"
+import { Separator } from "@/shared/ui/primitives/separator"
 import { Outlet } from "react-router"
-import { AppSidebar } from "../sidebar/appSidebar"
+import { AppSidebar } from "../sidebar/"
 
 //main app layout
 export const PrivateLayout = () => {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <div className="w-full flex flex-col flex-1">
-        <AppHeader />
-        <main className="flex-1 flex">
-          <div className="flex-1 flex flex-col w-full mx-auto p-6 lg:p-10">
-            <Outlet />
-          </div>
-        </main>
+    <SidebarProvider className="flex flex-col">
+      <AppHeader
+        sidebarTrigger={
+          <SidebarTrigger variant={"outline"} size={"lg"} className="-ml-1" />
+        }
+        separator={<Separator orientation="vertical" />}
+      />
+      <div className="flex flex-1">
+        <AppSidebar />
+        <SidebarInset>
+          <main className="flex-1 flex">
+            <div className="flex-1 flex flex-col max-w-[980px] mx-auto p-6 lg:p-10">
+              <Outlet />
+            </div>
+          </main>
+        </SidebarInset>
       </div>
     </SidebarProvider>
   )
