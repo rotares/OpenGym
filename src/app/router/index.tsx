@@ -38,10 +38,10 @@ const routeConfig = createBrowserRouter([
     ],
   },
   {
-    Component: PrivateLayout,
+    Component: ProtectedRoute,
     children: [
       {
-        Component: ProtectedRoute,
+        Component: PrivateLayout,
         children: [
           {
             Component: PageHeaderLayout,

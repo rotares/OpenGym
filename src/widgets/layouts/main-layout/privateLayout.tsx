@@ -1,12 +1,12 @@
-import { AppHeader } from "@/shared/ui/components/app-header"
+import { AppHeader } from "@/shared/ui/components"
 import {
+  Separator,
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/shared/ui/primitives"
-import { Separator } from "@/shared/ui/primitives/separator"
 import { Outlet } from "react-router"
-import { AppSidebar } from "../sidebar/"
+import { AppSidebar } from "../sidebar"
 
 //main app layout
 export const PrivateLayout = () => {

@@ -1,5 +1,4 @@
 import { useAuth } from "@/features/auth/model/auth/useAuth"
-import { CustomSpinner } from "@/shared/ui/components"
 import { Navigate, Outlet, useLocation } from "react-router"
 
 export const GuestRoute = () => {
@@ -8,7 +7,7 @@ export const GuestRoute = () => {
   const location = useLocation()
   const redirectRoute = location?.state?.from?.pathname || "/profile"
 
-  if (isLoading) return <CustomSpinner />
+  if (isLoading) return null
   if (isAuthentificated) return <Navigate to={redirectRoute} replace />
 
   return <Outlet />
