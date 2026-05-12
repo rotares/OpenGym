@@ -10,3 +10,7 @@ export type ItemType = {
 export interface NavigationConfig {
   string: ItemType[]
 }
+
+export type NavProps = {
+  items: ItemType[]
+}

@@ -1,4 +1,4 @@
-import { Dumbbell, History, Plus } from "lucide-react"
+import { Dumbbell, History, Plus, Settings, UserCircle } from "lucide-react"
 
 export const NAV_CONFIG = {
   mainNav: [
@@ -19,6 +19,20 @@ export const NAV_CONFIG = {
       name: "Упражнения",
       route: "/exercises",
       icon: Dumbbell,
+    },
+  ],
+  mobileNav: [
+    {
+      label: "profile",
+      name: "Профиль",
+      route: "/profile",
+      icon: UserCircle,
+    },
+    {
+      label: "settings",
+      name: "Настройки",
+      route: "/settings",
+      icon: Settings,
     },
   ],
 }

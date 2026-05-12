@@ -4,21 +4,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/ui/primitives"
-
 import { NavLink } from "react-router"
-import { type ItemType } from "../types"
+import { type NavProps } from "../types"
 
-type MainNavProps = {
-  items: ItemType[]
-}
-
-export const MainNav = ({ items }: MainNavProps) => {
+export const FactoryNav = ({ items, ...props }: NavProps) => {
   return (
-    <SidebarGroup>
+    <SidebarGroup {...props}>
       <SidebarMenu className="gap-3">
         {items.map(({ label, name, route, icon: Icon }) => (
           <SidebarMenuItem className="justify-center" key={label}>
-            <SidebarMenuButton className="px-6 py-5" asChild>
+            <SidebarMenuButton asChild>
               <NavLink to={route}>
                 {Icon && <Icon />}
                 <span>{name}</span>
