@@ -4,6 +4,7 @@ import {
   ExercisesPage,
   HomePage,
   NotFoundPage,
+  NotFoundPrivatePage,
   UserProfilePage,
   WorkoutsHistoryPage,
 } from "@/pages"
@@ -86,6 +87,10 @@ const routeConfig = createBrowserRouter([
                 },
               },
             ],
+          },
+          {
+            path: "*",
+            Component: NotFoundPrivatePage,
           },
         ],
       },

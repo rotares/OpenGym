@@ -1,6 +1,6 @@
 export { ExerciseDetailsPage } from "./exercise"
 export { ExercisesPage } from "./exercises"
 export { HomePage } from "./home"
-export { NotFoundPage } from "./not-found"
+export { NotFoundPage, NotFoundPrivatePage } from "./not-found"
 export { UserProfilePage } from "./user/ui/userProfile"
 export { WorkoutsHistoryPage } from "./workouts-history"
