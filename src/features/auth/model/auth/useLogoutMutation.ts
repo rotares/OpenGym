@@ -1,3 +1,14 @@
-import { supabase } from "@/shared/api/supabaseClient"
+import { useMutation } from "@tanstack/react-query"
+import { authApi } from "../../api/authApi"
 
-export const useLogout = async () => supabase.auth.signOut({ scope: "local" })
+export const useLogoutMutation = () => {
+  return useMutation({
+    mutationFn: () => authApi.logout(),
+    onError(error) {
+      console.log(error)
+    },
+    onSuccess(result) {
+      console.log(result)
+    },
+  })
+}
