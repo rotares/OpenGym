@@ -7,47 +7,29 @@ import {
   Spinner,
 } from "@/shared/ui/primitives"
 
+import { signInFields } from "../config/fields"
 import { useSignInForm } from "../model/forms/useSignInForm"
 import { FormField } from "./formField"
-
-const fields = [
-  {
-    name: "email",
-    type: "email",
-    placeholder: "your-email@gmail.com",
-    label: "Email",
-    defaultValue: "",
-  },
-
-  {
-    name: "password",
-    type: "password",
-    placeholder: "enter your password",
-    label: "Password",
-    defaultValue: "",
-  },
-]
-
 export const SignInForm = () => {
   const { isPending, control, errors, onSubmit } = useSignInForm()
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={onSubmit} noValidate className="relative">
       {errors?.root?.serverError && (
         <FieldError
-          className="text-center"
+          className="text-center absolute text-xs left-1/2 -translate-x-1/2"
           children={errors.root.serverError.message}
         />
       )}
       <FieldSet>
         <FieldGroup>
           {/* custom form */}
-          {fields.map((field) => (
+          {signInFields.map((field) => (
             <FormField key={field.name} control={control} {...field} />
           ))}
           <Field>
             <Button type="submit" variant={"outline"}>
-              {isPending ? <Spinner /> : "Sign In"}
+              {isPending ? <Spinner /> : "Sign In !"}
             </Button>
           </Field>
         </FieldGroup>

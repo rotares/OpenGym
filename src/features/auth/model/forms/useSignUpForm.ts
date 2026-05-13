@@ -15,6 +15,7 @@ export const useSignUpForm = () => {
     reset,
     trigger,
     clearErrors,
+    methods,
   } = useFormSettings<FormRegisterSchemaInput>({
     defaultValues: {
       email: "",
@@ -54,6 +55,7 @@ export const useSignUpForm = () => {
   })
 
   return {
+    methods,
     isPending,
     control,
     errors,

@@ -1,70 +1,94 @@
 import {
   Button,
-  Field,
   FieldError,
   FieldGroup,
   FieldSet,
   Spinner,
 } from "@/shared/ui/primitives"
-import { SignUpFirstStep, SignUpSecondStep } from "./signUpFirstStep"
-import { FormProvider } from "react-hook-form"
+
 import { DevTool } from "@hookform/devtools"
+import { ArrowLeft } from "lucide-react"
+import { FormProvider, useFormContext } from "react-hook-form"
+import { Step, Stepper, useStepper } from "rhf-stepper"
 import { useSignUpForm } from "../model/forms/useSignUpForm"
-import { useState } from "react"
+import { SignUpFirstStep, SignUpSecondStep } from "./signUpSteps"
 
 export const SignUpForm = () => {
-  const { isPending, control, errors, onSubmit, trigger, clearErrors } =
-    useSignUpForm()
-  const [step, setStep] = useState<1 | 2>(1)
-
-  const step1Names = ["email", "username"] as const
-  const step2Names = ["password", "confirmPassword"] as const
-
-  const handleNext = async () => {
-    const isValid = await trigger(step1Names)
-    if (isValid) {
-      clearErrors(step2Names)
-      setStep(2)
-    }
-  }
-
-  const handleBack = () => setStep(1)
+  const { isPending, control, errors, onSubmit, methods } = useSignUpForm()
 
   return (
     <>
-      <FormProvider trigger={trigger} control={control}>
-        <form onSubmit={onSubmit} noValidate>
+      <FormProvider {...methods}>
+        <form onSubmit={onSubmit} noValidate className="relative">
           {errors?.root?.serverError && (
             <FieldError
-              className="text-center"
+              className="text-center absolute text-xs left-1/2 -translate-x-1/2"
               children={errors.root.serverError.message}
             />
           )}
 
           <FieldSet>
             <FieldGroup>
-              {step === 1 ? <SignUpFirstStep /> : <SignUpSecondStep />}
-              <Field className="flex">
-                {step === 2 && (
-                  <Button type="button" variant="ghost" onClick={handleBack}>
-                    Back
-                  </Button>
+              <Stepper>
+                {({ activeStep }) => (
+                  <>
+                    <Step>{activeStep === 0 && <SignUpFirstStep />}</Step>
+                    <Step>{activeStep === 1 && <SignUpSecondStep />}</Step>
+
+                    <StepNavigation isPending={isPending} />
+                  </>
                 )}
-                {step === 1 ? (
-                  <Button type="button" onClick={handleNext} variant="outline">
-                    Next step
-                  </Button>
-                ) : (
-                  <Button disabled={isPending} type="submit" variant="outline">
-                    {isPending ? <Spinner /> : "Зарегистрироваться"}
-                  </Button>
-                )}
-              </Field>
+              </Stepper>
             </FieldGroup>
           </FieldSet>
         </form>
       </FormProvider>
       <DevTool control={control} />
     </>
+  )
+}
+
+const StepNavigation = ({ isPending }: { isPending: boolean }) => {
+  const { next, prev, isFirstStep, isLastStep } = useStepper()
+  const { clearErrors } = useFormContext()
+
+  return (
+    <div className="flex gap-4">
+      {!isLastStep && (
+        <Button
+          type="button"
+          className="flex-1"
+          onClick={next}
+          variant="outline"
+        >
+          Next Step
+        </Button>
+      )}
+
+      {!isFirstStep && (
+        <Button
+          type="button"
+          onClick={() => {
+            clearErrors("root.serverError")
+            prev()
+          }}
+          variant="outline"
+        >
+          <span className="sr-only">Back to first step</span>
+          <ArrowLeft />
+        </Button>
+      )}
+
+      {isLastStep && (
+        <Button
+          disabled={isPending}
+          type="submit"
+          variant="outline"
+          className="flex-1"
+        >
+          {isPending ? <Spinner /> : "Sign Up !"}
+        </Button>
+      )}
+    </div>
   )
 }
