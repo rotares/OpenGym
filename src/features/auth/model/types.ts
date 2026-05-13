@@ -1,4 +1,3 @@
-import type { Control } from "react-hook-form"
 export interface LoginDto {
   email: string
   password: string
@@ -17,7 +16,7 @@ interface RegisterAdditionalOptions {
 }
 
 export interface FormFieldProps {
-  control: Control
+  control?: unknown
   name: string
   type?: string
   placeholder?: string
