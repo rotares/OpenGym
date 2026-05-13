@@ -1,5 +1,4 @@
 import { useAuth } from "@/features/auth/model/auth/useAuth"
-import { CustomSpinner } from "@/shared/ui/components"
 import { Navigate, Outlet, useLocation } from "react-router"
 
 export const ProtectedRoute = () => {
@@ -7,7 +6,7 @@ export const ProtectedRoute = () => {
   const location = useLocation()
   const { isLoading, isAuthentificated } = useAuth()
 
-  if (isLoading) return <CustomSpinner />
+  if (isLoading) return null
   if (!isAuthentificated)
     return <Navigate to="/auth" state={{ from: location }} replace />
 

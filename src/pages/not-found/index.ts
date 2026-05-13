@@ -4,3 +4,4 @@
  */
 
 export { NotFoundPage } from "./ui/not-found-page"
+export { NotFoundPrivatePage } from "./ui/not-found-private-page"

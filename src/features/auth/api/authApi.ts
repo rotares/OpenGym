@@ -23,4 +23,9 @@ export const authApi = {
     if (error) throw new Error(error.message)
     return data
   },
+
+  async logout() {
+    const { error } = await supabase.auth.signOut({ scope: "local" })
+    if (error) throw new Error(error.message)
+  },
 }

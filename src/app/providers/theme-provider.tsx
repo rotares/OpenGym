@@ -7,8 +7,8 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const { theme, setTheme } = useThemeStore(
-    useShallow((state) => ({ theme: state.theme, setTheme: state.setTheme })),
+  const { theme } = useThemeStore(
+    useShallow((state) => ({ theme: state.theme })),
   )
 
   //using use layout beacause it's work before paint in browser (fix flash light)
@@ -17,6 +17,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
     root.classList.remove("light", "dark")
 
+    //sync with system theme
     if (theme === "system") {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
         .matches
@@ -24,14 +25,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
         : "light"
 
       root.classList.add(systemTheme)
-      setTheme(systemTheme)
       return
     }
-
     root.classList.add(theme)
-
-    setTheme(theme)
-  }, [theme, setTheme])
+  }, [theme])
 
   return <>{children}</>
 }

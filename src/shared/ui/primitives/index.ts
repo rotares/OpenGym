@@ -3,14 +3,30 @@
 
 export * from "./accordion"
 export { AspectRatio } from "./aspect-ratio"
+export { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 export { Button, buttonVariants } from "./button"
 export * from "./button-group"
 export { Card, CardContent, CardFooter } from "./card"
+export {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./dropdown-menu"
 export { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "./field"
 export { Input } from "./input"
 export * from "./input-group"
 export * from "./item"
-export { Sidebar, SidebarProvider } from "./sidebar"
+export { Separator } from "./separator"
+export * from "./sidebar"
+export { Sidebar, SidebarHeader, SidebarProvider } from "./sidebar"
 export * from "./skeleton"
 export { Spinner } from "./spinner"
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
