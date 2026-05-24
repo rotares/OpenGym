@@ -1,4 +1,4 @@
-import { queryOptions } from "@tanstack/react-query";
+import { QueryClient, queryOptions } from "@tanstack/react-query";
 import { exerciseService } from "../api/exercise-service";
 import { type ExerciseType } from "../model/exercise-types";
 
@@ -14,15 +14,13 @@ export const EXERCISE_QUERIES = {
     }),
 
   details: () => [...EXERCISE_QUERIES.all(), "details"],
-  detail: (id: string, queryClient: unknown) =>
+  detail: (id: string, queryClient: QueryClient) =>
     queryOptions<ExerciseType>({
       queryKey: [...EXERCISE_QUERIES.details(), id],
       queryFn: () => exerciseService.getById(id),
       initialData: () => {
-        
-        const allExercises = queryClient.getQueryData<ExerciseType>(EXERCISE_QUERIES.all())
+        const allExercises = queryClient.getQueryData<ExerciseType[]>(EXERCISE_QUERIES.all())
         return allExercises?.find((exercise: ExerciseType) => exercise.id === id)
-
       },
       refetchOnMount: false,
     }),

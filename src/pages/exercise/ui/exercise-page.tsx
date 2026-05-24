@@ -1,15 +1,19 @@
 import { exerciseApi } from "@/entities/exercise"
 import { CustomSpinner } from "@/shared/ui/components/spinner"
 import { ExerciseInstructions, ExercisePreview } from "@/widgets/exercise"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useParams } from "react-router"
 
 export const ExerciseDetailsPage = () => {
   const { id } = useParams()
-  const { data, isLoading, error } = useQuery(exerciseApi.detail(id))
+  const queryClient = useQueryClient()
+
+  const { data, isLoading, error } = useQuery(
+    exerciseApi.detail(id!, queryClient),
+  )
 
   if (isLoading) return <CustomSpinner />
-  if (error || !id) return <div>nor found</div>
+  if (error || !id || !data) return <div>nor found</div>
 
   return (
     <>
