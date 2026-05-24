@@ -1,11 +1,22 @@
-import { Spinner } from "@/shared/ui/primitives";
+import { cn } from "@/shared/lib/utils"
+import { Spinner } from "@/shared/ui/primitives"
 
-export const CustomSpinner = () => {
+type Props = {
+  className?: string
+  children?: React.ReactNode
+}
 
+export const CustomSpinner = ({ className, children }: Props) => {
   return (
-    <div className="flex-1 flex items-center justify-center">
+    <div
+      className={cn(
+        "flex-1 flex items-center justify-center ",
+        className,
+        children && "flex-col gap-4",
+      )}
+    >
       <Spinner className="size-10" />
+      {children && <div>{children}</div>}
     </div>
   )
-
 }
