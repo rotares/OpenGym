@@ -6,6 +6,7 @@ import {
   NotFoundPage,
   NotFoundPrivatePage,
   UserProfilePage,
+  WorkoutPage,
   WorkoutsHistoryPage,
 } from "@/pages"
 import { AuthPage } from "@/pages/auth"
@@ -50,6 +51,10 @@ const routeConfig = createBrowserRouter([
               {
                 path: "workouts-history",
                 Component: WorkoutsHistoryPage,
+              },
+              {
+                Component: WorkoutPage,
+                path: "workout-session",
               },
               {
                 path: "exercises",
