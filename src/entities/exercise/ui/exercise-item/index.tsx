@@ -9,14 +9,15 @@ import {
 import { memo } from "react"
 import { type ExerciseType } from "../../model/exercise-types"
 
-interface ExerciseItemProps extends Pick<ExerciseType, 'name' | 'muscle_group_id'> {
-  onClick?: (args?: unknown) => void,
+interface ExerciseItemProps extends Pick<
+  ExerciseType,
+  "name" | "muscle_group"
+> {
+  onClick?: (args?: unknown) => void
 }
 
 export const ExerciseItem = memo((props: ExerciseItemProps) => {
-  const { name, muscle_group_id, onClick } = props
-
-
+  const { name, muscle_group, onClick } = props
   return (
     <Item
       onClick={onClick}
@@ -28,7 +29,7 @@ export const ExerciseItem = memo((props: ExerciseItemProps) => {
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{name}</ItemTitle>
-        <ItemDescription>{muscle_group_id}</ItemDescription>
+        {muscle_group && <ItemDescription>{muscle_group.name}</ItemDescription>}
       </ItemContent>
     </Item>
   )

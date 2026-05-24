@@ -17,5 +17,5 @@ export const ExerciseContainerList = () => {
   if (isLoading) return <CustomSpinner />
   if (error) return <div>{error.message}</div>
 
-  return <ExerciseList exercises={filtered} onClick={onClick} />
+  return <ExerciseList exercises={filtered} onNavigate={onClick} />
 }
