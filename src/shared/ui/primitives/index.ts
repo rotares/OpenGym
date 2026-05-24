@@ -6,7 +6,25 @@ export { AspectRatio } from "./aspect-ratio"
 export { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 export { Button, buttonVariants } from "./button"
 export * from "./button-group"
-export { Card, CardContent, CardFooter } from "./card"
+export {
+  Card,
+  CardAction,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "./card"
+export { Checkbox } from "./checkbox"
+export {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger
+} from "./drawer"
 export {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +36,7 @@ export {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "./dropdown-menu"
 export { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "./field"
 export { Input } from "./input"
