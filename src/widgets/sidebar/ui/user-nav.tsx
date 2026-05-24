@@ -17,11 +17,14 @@ import {
   useSidebar,
 } from "@/shared/ui/primitives"
 import { ChevronsUpDown, LogOut, Settings, UserCircle } from "lucide-react"
+import { useNavigate } from "react-router"
 
 export const UserNav = ({ user }: { user: User }) => {
   const { username } = user
   const { isMobile } = useSidebar()
   const { mutate } = useLogoutMutation()
+
+  const navigate = useNavigate()
 
   return (
     <SidebarMenu>
@@ -66,11 +69,11 @@ export const UserNav = ({ user }: { user: User }) => {
               sideOffset={40}
             >
               <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/profile")}>
                   <UserCircle />
                   Профиль
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate("/settings")}>
                   <Settings />
                   Настройки
                 </DropdownMenuItem>

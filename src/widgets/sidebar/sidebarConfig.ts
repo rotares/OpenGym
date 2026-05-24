@@ -5,13 +5,13 @@ export const NAV_CONFIG = {
     {
       label: "training",
       name: "Тренировка",
-      route: "/training",
+      route: "/workout-session",
       icon: Plus,
     },
     {
       label: "history",
       name: "История тренировок",
-      route: "/training-history",
+      route: "/workouts-history",
       icon: History,
     },
     {
@@ -21,6 +21,7 @@ export const NAV_CONFIG = {
       icon: Dumbbell,
     },
   ],
+  
   mobileNav: [
     {
       label: "profile",
