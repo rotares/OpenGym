@@ -17,9 +17,8 @@ export const useSaveWorkoutMutation = () => {
       useWorkoutStore.getState().setStatus("saving")
     },
 
-    onSuccess: async (d, v, o, context) => {
+    onSuccess: async (_, __, ___, context) => {
       useWorkoutStore.getState().resetWorkout()
-      
       //invalidate workouts list on history-workout
       context.client.invalidateQueries({queryKey: ['workouts'], exact: true}, )
     },
