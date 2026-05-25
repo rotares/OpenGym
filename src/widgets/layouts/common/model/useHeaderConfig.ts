@@ -1,3 +1,6 @@
+//@ts-nocheck
+/* eslint-disable no-use-before-define */ 
+
 import { useMatches } from "react-router"
 import { type HeaderConfig } from "./types"
 

@@ -1,12 +1,20 @@
 import { useMatches } from "react-router"
-import { type PageHeaderConfig } from "./types"
+import type { RouteHandle } from "./types"
+
+
+//typeguard
+const isPageHeaderConfig = (handle: unknown): handle is RouteHandle => {
+  return (handle !== null && typeof handle === 'object' && 'pageHeader' in handle)
+}
 
 export const usePageHeaderConfig = () => {
   const matches = useMatches()
 
-  const pageHeaderConfig: PageHeaderConfig = [...matches]
+  const pageHeaderConfig = [...matches]
     .reverse()
-    .find((m) => m.handle?.pageHeader)?.handle?.pageHeader
-
+    .map(m => m.handle)
+    .find(isPageHeaderConfig)
+    ?.pageHeader
+    
   return pageHeaderConfig ?? null
 }
