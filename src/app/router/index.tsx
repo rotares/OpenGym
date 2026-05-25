@@ -16,6 +16,7 @@ import {
   PrivateLayout,
   PublicLayout,
 } from "@/widgets/layouts"
+import type { RouteHandle } from "@/widgets/layouts/common/model/types"
 import { createBrowserRouter, RouterProvider } from "react-router"
 import { GuestRoute } from "./guestRoute"
 import { ProtectedRoute } from "./protectedRoute"
@@ -68,7 +69,7 @@ const routeConfig = createBrowserRouter([
                         title: "Упражнения",
                         actions: <SearchBar />,
                       },
-                    },
+                    } as RouteHandle,
                   },
                   {
                     path: ":id",
@@ -78,7 +79,7 @@ const routeConfig = createBrowserRouter([
                         title: "Упражнение",
                         back: true,
                       },
-                    },
+                    } as RouteHandle,
                   },
                 ],
               },
