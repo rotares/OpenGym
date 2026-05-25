@@ -13,4 +13,5 @@ export interface NavigationConfig {
 
 export type NavProps = {
   items: ItemType[]
+  className?: string
 }

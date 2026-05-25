@@ -11,7 +11,7 @@ import {
 import { useThemeStore } from "@/app/store/theme"
 
 type ModeToggleProps = {
-  className: "string"
+  className?: "string"
 }
 
 export function ModeToggle({ className }: ModeToggleProps) {

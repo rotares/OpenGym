@@ -9,7 +9,7 @@ export const WorkoutsHistoryPage = () => {
     isRefetching,
   } = useQuery(WORKOUT_QUERIES.list())
 
-  if (isLoading) return CustomSpinner
+  if (isLoading) return <CustomSpinner />
 
   return (
     <>
