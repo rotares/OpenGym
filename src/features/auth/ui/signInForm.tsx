@@ -8,8 +8,10 @@ import {
 } from "@/shared/ui/primitives"
 
 import { signInFields } from "../config/fields"
+import { type FormLoginSchemaInput } from "../model/auth.schema"
 import { useSignInForm } from "../model/forms/useSignInForm"
 import { FormField } from "./formField"
+
 export const SignInForm = () => {
   const { isPending, control, errors, onSubmit } = useSignInForm()
 
@@ -25,7 +27,11 @@ export const SignInForm = () => {
         <FieldGroup>
           {/* custom form */}
           {signInFields.map((field) => (
-            <FormField key={field.name} control={control} {...field} />
+            <FormField<FormLoginSchemaInput>
+              key={field.name}
+              control={control}
+              {...field}
+            />
           ))}
           <Field>
             <Button type="submit" variant={"outline"}>

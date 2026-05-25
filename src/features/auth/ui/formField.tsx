@@ -1,15 +1,30 @@
 import { Field, FieldError, FieldLabel, Input } from "@/shared/ui/primitives"
 
+import { type FieldValues, useFormContext } from "react-hook-form"
 import { Controller } from "rhf-stepper"
 import { type FormFieldProps } from "../model/types"
 
-export const FormField = ({
+export const FormField = <T extends FieldValues = FieldValues>({
   name,
   type = "text",
   placeholder,
   label,
-  control,
-}: FormFieldProps) => {
+  control: controlProp,
+}: FormFieldProps<T>) => {
+  // Получаем control из контекста, если не передан в пропсы
+  let control = controlProp
+  try {
+    const formContext = useFormContext<T>()
+    control = controlProp || formContext.control
+  } catch {
+    // Если нет контекста, используем переданный control
+    if (!controlProp) {
+      throw new Error(
+        "FormField: control prop is required when FormProvider is not available",
+      )
+    }
+  }
+
   return (
     <Controller
       control={control}

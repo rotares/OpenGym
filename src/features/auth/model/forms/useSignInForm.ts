@@ -4,7 +4,7 @@ import { type LoginDto } from "../types"
 import { useFormSettings } from "./useFormSettings"
 
 export const useSignInForm = () => {
-  const { handleSubmit, control, setError, errors, reset } =
+  const { handleSubmit, control, setError, errors, reset, methods } =
     useFormSettings<FormLoginSchemaInput>({
       defaultValues: {
         email: "",
@@ -31,5 +31,6 @@ export const useSignInForm = () => {
     control,
     errors,
     onSubmit,
+    methods,
   }
 }

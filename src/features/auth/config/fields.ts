@@ -1,6 +1,8 @@
-// src/features/auth/config/fields.ts
-type FieldConfig = {
-  name: string
+import { type Path } from "react-hook-form"
+import { type FormLoginSchemaInput, type FormRegisterSchemaInput } from "../model/auth.schema"
+
+type FieldConfig<T> = {
+  name: Path<T>
   type: string
   placeholder: string
   label: string
@@ -9,7 +11,7 @@ type FieldConfig = {
 
 // ===== Sign Up =====
 
-export const signUpFirstStepFields: FieldConfig[] = [
+export const signUpFirstStepFields: FieldConfig<FormRegisterSchemaInput>[] = [
   {
     name: "email",
     type: "email",
@@ -26,7 +28,7 @@ export const signUpFirstStepFields: FieldConfig[] = [
   },
 ]
 
-export const signUpSecondStepFields: FieldConfig[] = [
+export const signUpSecondStepFields: FieldConfig<FormRegisterSchemaInput>[] = [
   {
     name: "password",
     type: "password",
@@ -45,7 +47,7 @@ export const signUpSecondStepFields: FieldConfig[] = [
 
 // ===== Sign In =====
 
-export const signInFields: FieldConfig[] = [
+export const signInFields: FieldConfig<FormLoginSchemaInput>[] = [
   {
     name: "email",
     type: "email",
