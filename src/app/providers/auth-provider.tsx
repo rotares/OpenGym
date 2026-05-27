@@ -48,7 +48,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           session: null,
         })
 
-        queryClient.removeQueries({ queryKey: USER_KEYS.me() })
+        queryClient.clear()
+        // queryClient.removeQueries({ queryKey: USER_KEYS.me() })
         return
       }
 
@@ -71,7 +72,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       subscription.unsubscribe()
     }
-  }, [])
+  }, [queryClient])
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
