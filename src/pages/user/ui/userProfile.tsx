@@ -1,12 +1,7 @@
-import { useUser } from "@/entities/user/model/useUser"
-import { CustomSpinner } from "@/shared/ui/components"
+import { useUser } from "@/entities/user"
 
 export const UserProfilePage = () => {
   const { data: user } = useUser()
-
-  if (!user) {
-    return <CustomSpinner />
-  }
 
   return (
     <section className="flex flex-1">
