@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import { workoutService } from "../api/workout-service"
+import { workoutMapper } from "../lib/workout-mapper"
 import type { WorkoutSession } from "./workout-session.types"
 import { useWorkoutStore } from "./workoutStore"
 
-type SaveWorkoutPayload = {
+export type SaveWorkoutPayload = {
   workoutDraft: WorkoutSession,
   userId: string,
 }
@@ -13,19 +14,40 @@ export const useSaveWorkoutMutation = () => {
   return useMutation({
     mutationFn: ({workoutDraft, userId} : SaveWorkoutPayload) => workoutService.saveWorkout(workoutDraft, userId),
 
-    onMutate: () => {
+    onMutate: async (variables, context) => {
+
+      await context.client.cancelQueries({queryKey: ['workouts']})
+
+      //install saving status
       useWorkoutStore.getState().setStatus("saving")
+
+      const mappedData = workoutMapper.optimisticMapper(variables)
+      const prevData = context.client.getQueryData(['workouts'])
+
+      context.client.setQueryData(['workouts'], (old: Array<unknown>) => {
+        if(!old) return
+
+        return [...old, mappedData]
+      }) 
+      
+      return {prevData}
     },
 
-    onSuccess: async (_, __, ___, context) => {
+    onSuccess: () => {
       useWorkoutStore.getState().resetWorkout()
-      //invalidate workouts list on history-workout
-      context.client.invalidateQueries({queryKey: ['workouts'], exact: true}, )
     },
     
-    onError: (error) => {
-      console.error("Error saving workout:", error)
+    onSettled: (_, __, ___, ____, context) => {
+      context.client.invalidateQueries({queryKey: ['workouts'], exact: true}, )
+    },
+
+    onError: (error, _, onMutateResult, context) => {
+      console.warn(error)
       useWorkoutStore.getState().setStatus("active")
+
+      if(onMutateResult?.prevData) {
+        context.client.setQueryData(['workouts'], onMutateResult.prevData)
+      }
     },
     
   })}

@@ -1,4 +1,4 @@
-import { supabase } from '@/shared/api/supabaseClient';
+import { supabase } from '@/shared/api';
 import { workoutMapper } from '../lib/workout-mapper';
 import { type WorkoutSession } from './../model/workout-session.types';
 
@@ -23,7 +23,7 @@ export const workoutService = {
     
     //sets mapper
     const setsPayload = workoutMapper.setsMapper(insertedExercises!, workoutDraft.exercises)  
-
+ 
     await supabase.from("sets").insert(setsPayload)
 
     return true

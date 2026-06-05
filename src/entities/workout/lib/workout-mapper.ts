@@ -1,7 +1,8 @@
 import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types"
-import type { WorkoutExerciseType } from "../model/types"
-import { type WorkoutSession } from "../model/workout-session.types"
-
+import { z } from "zod"
+import { type SaveWorkoutPayload } from "../model/saveWorkoutMutation"
+import type { WorkoutExerciseType, WorkoutValidationErrors } from "../model/types"
+import { type WorkoutSession, } from "../model/workout-session.types"
 
 export const workoutMapper = {
 
@@ -19,6 +20,7 @@ export const workoutMapper = {
       throw new Error("Inserted exercises or workout draft exercises are undefined")
     }
 
+    //flat map т.к возвращается массив сетов для упражнения, а нам нужны сеты в виде обьекта массивов
     return insertedExercises.flatMap((insertedExercise, index) => {
       // Find corresponding exercise in workoutDraft
       const localExercise = workoutDraftExercises[index]
@@ -26,8 +28,8 @@ export const workoutMapper = {
       return localExercise.sets.map((set, setIndex) => ({
         workout_exercise_id: insertedExercise.id,
         order_index: setIndex,
-        reps: set.reps,
-        weight: set.weight,
+        reps: Number(set.reps),
+        weight: Number(set.weight),
         is_done: set.completed,
       }))
     })
@@ -40,5 +42,36 @@ export const workoutMapper = {
       started_at: workout.startedAt,
       finished_at: new Date().toISOString(),
     }
-  )
+  ),
+
+  optimisticMapper({workoutDraft, userId}: SaveWorkoutPayload) {
+   const {id, startedAt, finishedAt} = workoutDraft
+   return {
+    title: 'newWorkout',
+    id,
+    startedAt,
+    finishedAt,
+    user_id: userId
+   }
+  },
+
+  //validation error mapper - преобразует ошибки валидации в удобный для отображения формат
+  validateErrorMapper(workout: WorkoutSession, issues: z.core.$ZodIssue[]):WorkoutValidationErrors {
+    const errors: WorkoutValidationErrors = {}
+
+    for(const issue of issues) {
+
+      const [, errorIndex] = issue.path
+      const exercise = workout.exercises[errorIndex as number]
+
+      if(!exercise) continue
+
+      errors[exercise.id] = {
+        hasError: true
+      }
+      
+    }
+
+    return errors
+  }
 }

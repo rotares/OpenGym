@@ -1,6 +1,6 @@
 // entities/workout/model/workout-store.types.ts
 
-import type { Tables } from "@/shared/api/types/database-supabase"
+import type { Tables } from "@/shared/api"
 import type {
   WorkoutExercise,
   WorkoutSession,
@@ -8,10 +8,17 @@ import type {
 } from "./workout-session.types"
 
 export type Exercise = Tables<"exercises"> 
-
-
 export type Workout = Tables<"workouts">
 export type WorkoutExerciseType = Tables<"workout_exercises">
+
+
+export type WorkoutValidationErrors =
+  Record<
+    string,
+    {
+      hasError: boolean
+    }
+  >
 
 /**
  * Payload for updating set
