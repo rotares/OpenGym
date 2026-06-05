@@ -1,25 +1,46 @@
-import { SearchBar } from "@/features/search-bar"
-import {
-  ExerciseDetailsPage,
-  ExercisesPage,
-  HomePage,
-  NotFoundPage,
-  NotFoundPrivatePage,
-  UserProfilePage,
-  WorkoutPage,
-  WorkoutsHistoryPage,
-} from "@/pages"
-import { AuthPage } from "@/pages/auth"
-import {
-  ExerciseLayout,
-  PageHeaderLayout,
-  PrivateLayout,
-  PublicLayout,
-} from "@/widgets/layouts"
-import type { RouteHandle } from "@/widgets/layouts/common/model/types"
+import { HomePage } from "@/pages/home"
+import { LazyPage } from "@/shared/ui/components"
+import { PageHeaderLayout, type RouteHandle } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
-import { GuestRoute } from "./guestRoute"
-import { ProtectedRoute } from "./protectedRoute"
+import { PrivateLayout } from "../layout/PrivateLayout"
+import { PublicLayout } from "../layout/PublicLayout"
+import { GuestRoute } from "./GuestRoute"
+import { ProtectedRoute } from "./ProtectedRoute"
+
+// Lazy loaded pages
+const AuthPage = LazyPage(() => import("@/pages/auth"), "AuthPage")
+
+const ExerciseListPage = LazyPage(
+  () => import("@/pages/exercise/list"),
+  "ExerciseListPage",
+)
+
+const ExerciseDetailsPage = LazyPage(
+  () => import("@/pages/exercise/details"),
+  "ExerciseDetailsPage",
+)
+
+const WorkoutPage = LazyPage(
+  () => import("@/pages/workout/session"),
+  "WorkoutSessionPage",
+)
+
+const WorkoutsHistoryPage = LazyPage(
+  () => import("@/pages/workout/history"),
+  "WorkoutHistoryPage",
+)
+
+const UserProfilePage = LazyPage(
+  () => import("@/pages/user"),
+  "UserProfilePage",
+)
+
+const NotFoundPage = LazyPage(() => import("@/pages/not-found"), "NotFoundPage")
+
+const NotFoundPrivatePage = LazyPage(
+  () => import("@/pages/not-found"),
+  "NotFoundPrivatePage",
+)
 
 const routeConfig = createBrowserRouter([
   {
@@ -59,17 +80,16 @@ const routeConfig = createBrowserRouter([
               },
               {
                 path: "exercises",
-                Component: ExerciseLayout,
                 children: [
                   {
                     index: true,
-                    Component: ExercisesPage,
-                    handle: {
-                      header: {
-                        title: "Упражнения",
-                        actions: <SearchBar />,
-                      },
-                    } as RouteHandle,
+                    Component: ExerciseListPage,
+                    // handle: {
+                    //   header: {
+                    //     title: "Упражнения",
+                    //     actions: <SearchBar />,
+                    //   },
+                    // } as RouteHandle,
                   },
                   {
                     path: ":id",
