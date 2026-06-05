@@ -29,10 +29,8 @@ export const PrivateLayout = () => {
               flex-col
               h-full
               w-full
-              max-w-[980px]
               
-              mx-auto
-
+              
               px-6
               pt-6
               lg:px-10

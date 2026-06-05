@@ -106,11 +106,11 @@ const routeConfig = createBrowserRouter([
               {
                 Component: UserProfilePage,
                 path: "profile",
-                handle: {
-                  pageHeader: {
-                    title: "Ваш профиль",
-                  },
-                },
+                // handle: {
+                //   pageHeader: {
+                //     title: "Ваш профиль",
+                //   },
+                // },
               },
             ],
           },
