@@ -1,7 +1,5 @@
-import { type Tables } from "@/shared/api/types/database-supabase"
+import { type Tables } from "@/shared/api"
 
 export type ExerciseType = Tables<"exercises"> & {
-    muscle_group?: {
-    name: string
-  }
+  muscle_group_name?: string
 }
