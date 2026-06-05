@@ -3,8 +3,10 @@ import { Outlet } from "react-router"
 import { type PageHeaderConfig } from "../common/model/types"
 import { usePageHeaderConfig } from "../common/model/usePageHeaderConfig"
 //layout for pages with header, which will be used in router for pages with header
+
 export const PageHeaderLayout = () => {
   const pageHeaderConfig: PageHeaderConfig | null = usePageHeaderConfig()
+
   if (!pageHeaderConfig) return <Outlet />
 
   return (

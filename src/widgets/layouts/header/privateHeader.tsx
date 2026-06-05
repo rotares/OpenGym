@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/shared/ui/components/themeToggle/theme-toggle"
+import { ThemeToggler } from "@/features/theme-toggler"
 import { Button, useSidebar } from "@/shared/ui/primitives"
 import { MenuIcon } from "lucide-react"
 import { useNavigate } from "react-router"
@@ -19,9 +19,13 @@ export const PrivateHeader = () => {
         </h1>
 
         <div className="flex gap-3">
-          <ModeToggle />
+          <ThemeToggler />
           {isMobile && (
-            <Button size={"icon-lg"} variant={"ghost"} onClick={toggleSidebar}>
+            <Button
+              size={"icon-lg"}
+              variant={"ghost"}
+              onClick={() => toggleSidebar()}
+            >
               <MenuIcon />
             </Button>
           )}
