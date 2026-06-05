@@ -1,6 +1,6 @@
+import { useThemeStore } from "@/entities/theme"
 import { useLayoutEffect } from "react"
 import { useShallow } from "zustand/shallow"
-import { useThemeStore } from "../store/theme"
 
 interface ThemeProviderProps {
   children: React.ReactNode

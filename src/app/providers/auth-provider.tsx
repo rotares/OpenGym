@@ -1,9 +1,6 @@
-import { USER_KEYS, USER_QUERIES } from "@/entities/user/model/userQueries"
-import {
-  AuthContext,
-  type AuthContextType,
-} from "@/features/auth/model/context/authContext"
-import { supabase } from "@/shared/api/supabaseClient"
+import { USER_KEYS, USER_QUERIES } from "@/entities/user"
+import { AuthContext, type AuthContextType } from "@/features/auth"
+import { supabase } from "@/shared/api"
 import { useQueryClient } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
 
@@ -26,7 +23,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           session: data.session,
         })
 
-        queryClient.prefetchQuery(USER_QUERIES.me(true))
+        queryClient.prefetchQuery(USER_QUERIES.me())
       } else {
         setAuth({
           status: "guest",
@@ -64,7 +61,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           session,
         })
 
-        queryClient.prefetchQuery(USER_QUERIES.me(true))
+        queryClient.prefetchQuery(USER_QUERIES.me())
       }
     })
 
