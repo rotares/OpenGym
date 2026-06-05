@@ -4,7 +4,7 @@ import {
   ExerciseFilterModal,
   useExerciseFilters,
 } from "@/features/exercise/filters"
-import { useSearch } from "@/shared/lib/useSearch"
+import { useSearch } from "@/shared/lib"
 import { SearchInput } from "@/shared/ui/components"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useCallback } from "react"
@@ -14,6 +14,7 @@ export const ExerciseListPage = () => {
   const navigate = useNavigate()
 
   const { data: exercises, error } = useSuspenseQuery(exerciseApi.list())
+
   const { filteredExercises, updateFilters, resetFilters } = useExerciseFilters(
     {
       exercises,
