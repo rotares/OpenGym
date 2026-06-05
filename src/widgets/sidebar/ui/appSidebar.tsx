@@ -1,4 +1,3 @@
-import { useUser } from "@/entities/user/model/useUser"
 import { cn } from "@/shared/lib"
 import {
   Sidebar,
@@ -12,13 +11,13 @@ import {
   useSidebar,
 } from "@/shared/ui/primitives"
 import { ChevronRight } from "lucide-react"
-import { NAV_CONFIG } from "../sidebarConfig"
+import { Suspense } from "react"
+import { NAV_CONFIG } from "../model/sidebarConfig"
 import { FactoryNav } from "./nav-factory"
 import { UserNav } from "./user-nav"
 import { UserNavSkeleton } from "./user-nav-skeleton"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: user } = useUser()
   const { isMobile, toggleSidebar } = useSidebar()
 
   return (
@@ -46,7 +45,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         )}
       </SidebarContent>
       <SidebarFooter className=" border-t">
-        {!user ? <UserNavSkeleton /> : <UserNav user={user} />}
+        <Suspense fallback={<UserNavSkeleton />}>
+          <UserNav />
+        </Suspense>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

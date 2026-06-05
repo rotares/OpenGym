@@ -6,7 +6,7 @@ import {
   useSidebar,
 } from "@/shared/ui/primitives"
 import { NavLink } from "react-router"
-import { type NavProps } from "../types"
+import { type NavProps } from "../model/types"
 
 export const FactoryNav = ({ items, ...props }: NavProps) => {
   const { setOpenMobile } = useSidebar()

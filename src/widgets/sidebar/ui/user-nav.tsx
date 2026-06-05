@@ -1,5 +1,5 @@
-import { type User } from "@/entities/user/model/types"
-import { useLogoutMutation } from "@/features/auth/model/auth/useLogoutMutation"
+import { useUser } from "@/entities/user"
+import { useLogoutMutation } from "@/features/auth"
 import { cn } from "@/shared/lib"
 import {
   Avatar,
@@ -17,10 +17,14 @@ import {
   useSidebar,
 } from "@/shared/ui/primitives"
 import { ChevronsUpDown, LogOut, Settings, UserCircle } from "lucide-react"
+import { memo } from "react"
 import { useNavigate } from "react-router"
 
-export const UserNav = ({ user }: { user: User }) => {
-  const { username } = user
+export const UserNav = memo(() => {
+  const {
+    data: { username },
+  } = useUser()
+
   const { isMobile } = useSidebar()
   const { mutate } = useLogoutMutation()
 
@@ -94,4 +98,4 @@ export const UserNav = ({ user }: { user: User }) => {
       </SidebarMenuItem>
     </SidebarMenu>
   )
-}
+})
