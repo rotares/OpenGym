@@ -15,6 +15,7 @@ export {
   CardTitle
 } from "./card"
 export { Checkbox } from "./checkbox"
+export { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogPortal, DialogTitle, DialogTrigger } from "./dialog"
 export {
   Drawer,
   DrawerClose,
@@ -46,5 +47,6 @@ export { Separator } from "./separator"
 export * from "./sidebar"
 export { Sidebar, SidebarHeader, SidebarProvider } from "./sidebar"
 export * from "./skeleton"
+export { Toaster } from "./sonner"
 export { Spinner } from "./spinner"
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
