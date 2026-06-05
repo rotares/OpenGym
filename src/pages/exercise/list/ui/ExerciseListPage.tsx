@@ -5,7 +5,7 @@ import {
   useExerciseFilters,
 } from "@/features/exercise/filters"
 import { useSearch } from "@/shared/lib"
-import { SearchInput } from "@/shared/ui/components"
+import { PageWrapper, SearchInput } from "@/shared/ui/components"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useCallback } from "react"
 import { useNavigate } from "react-router"
@@ -34,8 +34,8 @@ export const ExerciseListPage = () => {
   if (error) return <div>{error.message}</div>
 
   return (
-    <>
-      <header className="pb-4">
+    <PageWrapper>
+      <PageWrapper.Header>
         <h2 className="text-xl mb-4">Упражнения</h2>
         <div className="flex gap-4">
           <SearchInput
@@ -48,10 +48,10 @@ export const ExerciseListPage = () => {
             onResetFilters={resetFilters}
           />
         </div>
-      </header>
-      <main className="no-scrollbar overflow-y-auto pb-8">
+      </PageWrapper.Header>
+      <PageWrapper.Content>
         <ExerciseList exercises={filteredExWithSearch} onNavigate={onClick} />
-      </main>
-    </>
+      </PageWrapper.Content>
+    </PageWrapper>
   )
 }

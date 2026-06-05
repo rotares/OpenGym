@@ -4,9 +4,9 @@ import {
   useHandleFinishWorkout,
 } from "@/entities/workout"
 import { useState } from "react"
+import { PageWrapper } from "../../../../shared/ui/components"
 import { WorkoutSessionActionsBottomPanel } from "./WorkoutSessionActionsBottomPanel"
 import { WorkoutSessionContent } from "./WorkoutSessionContent"
-
 export const WorkoutSessionPage = () => {
   const [exerciseErrorsIds, setExerciseErrorsIds] =
     useState<WorkoutValidationErrors>({})
@@ -19,43 +19,16 @@ export const WorkoutSessionPage = () => {
   })
 
   return (
-    <>
-      <header className="flex justify-between gap-4 h-[50px]">
+    <PageWrapper>
+      <PageWrapper.Header className="flex justify-between gap-4">
         <h1 className="text-xl">Тренировка</h1>
         <WorkoutSessionActionsBottomPanel
           handleFinishWorkout={handleFinishWorkout}
         />
-      </header>
-      <main
-        className="
-        relative
-        mt-10
-        h-[calc(100%-50px)]
-      "
-      >
-        {/* scroll content */}
-        <div
-          className="
-          h-full
-          overflow-y-auto
-          no-scrollbar
-          pb-5
-        "
-        >
-          <WorkoutSessionContent exerciseErrorsIds={exerciseErrorsIds} />
-        </div>
-
-        <div
-          className="
-          absolute
-          inset-x-0
-          bottom-0
-          z-40
-          bg-background
-          p-4          
-        "
-        ></div>
-      </main>
-    </>
+      </PageWrapper.Header>
+      <PageWrapper.Content className="h-full">
+        <WorkoutSessionContent exerciseErrorsIds={exerciseErrorsIds} />
+      </PageWrapper.Content>
+    </PageWrapper>
   )
 }

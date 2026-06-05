@@ -2,6 +2,7 @@ import { WORKOUT_QUERIES, WorkoutItem } from "@/entities/workout"
 import { Button } from "@/shared/ui/primitives"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router"
+import { PageWrapper } from "../../../../shared/ui/components"
 
 export const WorkoutHistoryPage = () => {
   const { data: workouts } = useSuspenseQuery(WORKOUT_QUERIES.list())
@@ -19,15 +20,15 @@ export const WorkoutHistoryPage = () => {
   }
 
   return (
-    <>
-      <header className="pb-4">
-        <h2 className="text-xl mb-4">История тренировок</h2>
-      </header>
-      <main className="no-scrollbar overflow-y-auto">
+    <PageWrapper>
+      <PageWrapper.Header>
+        <h2 className="text-xl">История тренировок</h2>
+      </PageWrapper.Header>
+      <PageWrapper.Content>
         {workouts.map((workout) => (
           <WorkoutItem workout={workout} key={workout.id} />
         ))}
-      </main>
-    </>
+      </PageWrapper.Content>
+    </PageWrapper>
   )
 }

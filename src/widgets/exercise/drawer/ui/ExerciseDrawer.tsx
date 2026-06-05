@@ -17,8 +17,6 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const isMobile = useIsMobile()
 
-  console.log()
-
   const handleSelectExercise = (exercise: ExerciseType) => {
     onAdd(exercise)
     setIsOpen(false)
@@ -32,6 +30,7 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
 
     getContainer()
   }, [isOpen])
+
   return (
     <Drawer container={container} open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
@@ -39,7 +38,7 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
           {isMobile ? <Plus /> : "Добавить упражнение"}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="mx-auto md:w-[90%] lg:w-full xl:max-w-none h-[75vh] p-4">
+      <DrawerContent className="mx-auto md:w-[95%] xl:max-w-none h-[75vh] p-4">
         {/* fallback for Exercises */}
         <Suspense fallback={<CustomSpinner />}>
           <ExerciseDrawerContentInner onAdd={handleSelectExercise} />
