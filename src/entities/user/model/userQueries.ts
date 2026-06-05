@@ -7,12 +7,11 @@ export const USER_KEYS = {
 }
 
 export const USER_QUERIES = {
-  me: (enabled: boolean) =>
+  me: () =>
     queryOptions({
       queryKey: USER_KEYS.me(),
       queryFn: () => userApi.getCurrentUser(),
       refetchOnMount: false,
-      enabled: enabled,
       staleTime: 5 * 1000 * 60,
     }),
 }
