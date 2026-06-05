@@ -10,9 +10,9 @@ export type WorkoutStatus = "active" | "saving"
 export interface WorkoutSet {
   id: string
 
-  reps: number
+  reps: string
 
-  weight: number
+  weight: string
 
   completed: boolean
 }

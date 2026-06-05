@@ -37,8 +37,8 @@ export const useWorkoutStore = create<WorkoutStore>()(
               sets: [
                 {
                   id: nanoid(),
-                  reps: 0,
-                  weight: 0,
+                  reps: '',
+                  weight: '',
                   completed: false,
                 },
               ],
@@ -66,8 +66,8 @@ export const useWorkoutStore = create<WorkoutStore>()(
 
             exercise.sets.push({
               id: nanoid(),
-              reps: 0,
-              weight: 0,
+              reps: '',
+              weight: '',
               completed: false,
             })
           }),
