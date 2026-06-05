@@ -1,4 +1,4 @@
-import { supabase } from "@/shared/api/supabaseClient/index"
+import { supabase } from "@/shared/api/"
 import type { LoginDto, RegisterDto } from "../model/types"
 
 //api for auth
