@@ -1,5 +1,5 @@
+import { PublicHeader } from "@/widgets/layouts/header"
 import { Outlet } from "react-router"
-import { PublicHeader } from "../header"
 
 //main app layout
 export const PublicLayout = () => {
