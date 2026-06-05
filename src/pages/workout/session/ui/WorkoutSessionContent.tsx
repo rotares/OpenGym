@@ -1,9 +1,16 @@
-import { useWorkoutStore } from "@/entities/workout/model/workoutStore"
-import { ExerciseEditor } from "@/features/exercise"
+import {
+  useWorkoutStore,
+  type WorkoutValidationErrors,
+} from "@/entities/workout"
+import { ExerciseEditor } from "@/features/exercise/editor"
 import { CustomSpinner } from "@/shared/ui/components"
 import { useShallow } from "zustand/shallow"
 
-export const WorkoutContent = () => {
+type Props = {
+  exerciseErrorsIds: WorkoutValidationErrors
+}
+
+export const WorkoutSessionContent = ({ exerciseErrorsIds }: Props) => {
   const { workout, status, startWorkout } = useWorkoutStore(
     useShallow((s) => ({
       workout: s.workout,
@@ -36,9 +43,13 @@ export const WorkoutContent = () => {
 
   if (workout.exercises.length > 0) {
     return (
-      <div className="mx-auto max-w-100">
+      <div className="mx-auto">
         {workout.exercises.map((exercise) => (
-          <ExerciseEditor key={exercise.id} exercise={exercise} />
+          <ExerciseEditor
+            hasError={!!exerciseErrorsIds[exercise.id]}
+            key={exercise.id}
+            exercise={exercise}
+          />
         ))}
       </div>
     )

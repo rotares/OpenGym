@@ -1,7 +1,0 @@
-export { ExerciseDetailsPage } from "./exercise"
-export { ExercisesPage } from "./exercises"
-export { HomePage } from "./home"
-export { NotFoundPage, NotFoundPrivatePage } from "./not-found"
-export { UserProfilePage } from "./user/ui/userProfile"
-export { WorkoutPage } from "./workout"
-export { WorkoutsHistoryPage } from "./workouts-history"
