@@ -1,5 +1,6 @@
 import { Monitor, Moon, Sun } from "lucide-react"
 
+import { useThemeStore } from "@/entities/theme"
 import {
   Button,
   DropdownMenu,
@@ -7,14 +8,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/ui/primitives"
-
-import { useThemeStore } from "@/app/store/theme"
+import { memo } from "react"
 
 type ModeToggleProps = {
   className?: "string"
 }
 
-export function ModeToggle({ className }: ModeToggleProps) {
+export const ThemeToggler = memo(({ className }: ModeToggleProps) => {
   const setTheme = useThemeStore((s) => s.setTheme)
 
   return (
@@ -23,7 +23,7 @@ export function ModeToggle({ className }: ModeToggleProps) {
         <Button variant="ghost" size="icon-lg">
           <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">Переключить тему</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent sideOffset={15} align="center">
@@ -42,4 +42,4 @@ export function ModeToggle({ className }: ModeToggleProps) {
       </DropdownMenuContent>
     </DropdownMenu>
   )
-}
+})
