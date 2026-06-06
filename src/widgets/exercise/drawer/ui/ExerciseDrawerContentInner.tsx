@@ -3,13 +3,15 @@ import {
   ExerciseFilterModal,
   useExerciseFilters,
 } from "@/features/exercise/filters"
+import { SortDropdown, useSort } from "@/features/universal-sort"
 import { useSearch } from "@/shared/lib"
 import { SearchInput } from "@/shared/ui/components"
 import { DrawerHeader, DrawerTitle } from "@/shared/ui/primitives"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { memo } from "react"
-import { type DrawerProps } from "../model"
+import { INITIAL_SORT_CONFIG, SORT_OPTIONS } from "../config"
 
+import { type DrawerProps } from "../model"
 export const ExerciseDrawerContentInner = memo(({ onAdd }: DrawerProps) => {
   //get data from suspense
   const { data: exercises } = useSuspenseQuery(exerciseApi.list())
@@ -31,6 +33,11 @@ export const ExerciseDrawerContentInner = memo(({ onAdd }: DrawerProps) => {
     searchKey: "name",
   })
 
+  const { currentSortConfig, requestSort, resetSort, sortedData } = useSort({
+    data: filteredExWithSearch,
+    initialSortConfig: INITIAL_SORT_CONFIG,
+  })
+
   return (
     <>
       <DrawerHeader className="px-0">
@@ -45,10 +52,16 @@ export const ExerciseDrawerContentInner = memo(({ onAdd }: DrawerProps) => {
             onChangeFilter={updateFilters}
             onResetFilters={resetFilters}
           />
+          <SortDropdown
+            currentSortConfig={currentSortConfig}
+            resetSort={resetSort}
+            onChangeSort={requestSort}
+            sortOptions={SORT_OPTIONS}
+          />
         </div>
       </DrawerHeader>
       <div className="no-scrollbar overflow-y-auto h-full">
-        <ExerciseList onAdd={onAdd} exercises={filteredExWithSearch!} />
+        <ExerciseList onAdd={onAdd} exercises={sortedData!} />
       </div>
     </>
   )
