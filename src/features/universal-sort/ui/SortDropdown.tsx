@@ -34,7 +34,7 @@ export const SortDropdown = <T,>({
           <ArrowDownUp />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-max">
+      <DropdownMenuContent align="end" className="w-max">
         <DropdownMenuGroup>
           {sortOptions.map(({ displayName, key }) => {
             const activeItem = currentSortConfig.key === key

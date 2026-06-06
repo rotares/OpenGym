@@ -38,7 +38,7 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
           {isMobile ? <Plus /> : "Добавить упражнение"}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="mx-auto md:w-[95%] xl:max-w-none h-[75vh] p-4">
+      <DrawerContent className="mx-auto md:w-[95%] xl:max-w-[1120px] h-[75vh] p-4">
         {/* fallback for Exercises */}
         <Suspense fallback={<CustomSpinner />}>
           <ExerciseDrawerContentInner onAdd={handleSelectExercise} />
