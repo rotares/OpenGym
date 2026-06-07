@@ -1,14 +1,14 @@
 
-import { type Workout } from "@/entities/workout";
+import type { WorkoutListItem } from "@/entities/workout/model/types";
 import { type SortConfig, type SortOption } from "@/features/universal-sort";
 
 
-export const SORT_OPTIONS:SortOption<Workout>[] = [{
-  displayName: 'Дата создания',
-  key: 'created_at'
+export const SORT_OPTIONS:SortOption<WorkoutListItem>[] = [{
+  displayName: 'Дата',
+  key: 'date'
 }]
 
-export const INITIAL_SORT_CONFIG:SortConfig<Workout> = {
-  key: 'created_at',
+export const INITIAL_SORT_CONFIG:SortConfig<WorkoutListItem> = {
+  key: 'date',
   order: 'asc'
 }
