@@ -1,16 +1,24 @@
-import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types"
-import { z } from "zod"
-import { type SaveWorkoutPayload } from "../model/saveWorkoutMutation"
-import type { WorkoutExerciseType, WorkoutValidationErrors } from "../model/types"
-import { type WorkoutSession, } from "../model/workout-session.types"
+import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types";
+import { formatDate } from "@/shared/lib";
+import { z } from "zod";
+import { type SaveWorkoutPayload } from "../model/saveWorkoutMutation";
+import type { ExerciseSaving, RawWorkoutDetails, RawWorkoutListItem, WorkoutDetails, WorkoutExerciseType, WorkoutListItem, WorkoutSaving, WorkoutValidationErrors } from "../model/types";
+import { type WorkoutSession, } from "../model/workout-session.types";
 
 export const workoutMapper = {
 
-  exerciseMap: (exercises: WorkoutExercise[], workoutId: string) => {
+  exerciseMap: (exercises: WorkoutExercise[], workoutId: string):ExerciseSaving[] => {
+
+    const getTotalVolume = (exercise: WorkoutExercise) => {
+      return exercise.sets.reduce((acc, {weight}) => Number(weight) + acc , 0)
+    } 
+
     return exercises.map((exercise, index) => ({
       workout_id: workoutId,
       exercise_id: exercise.exerciseId,
       order_index: index,
+      total_sets: exercise.sets.length,
+      total_volume: getTotalVolume(exercise),
     }))
   },
 
@@ -35,14 +43,30 @@ export const workoutMapper = {
     })
   },
 
-  finishMapper: (workout: WorkoutSession, userId: string) => (
-    {
+  finishMapper: (workout: WorkoutSession, userId: string):WorkoutSaving => {
+    const totalInfo = workout.exercises.reduce((res, {sets}) => {
+        res.totalSets += sets.length
+        const totalVol = sets.reduce((acc, {weight}) => acc + Number(weight), 0)
+        res.totalVol += totalVol
+
+        return res
+    }, {totalSets:0, totalVol:0})
+
+    const finishedAt = new Date().toISOString()
+    const durationMinutes = Math.floor((new Date(finishedAt).valueOf() - new Date(workout.startedAt).valueOf()) / (1000 * 60))
+
+    const formatted:WorkoutSaving = {
       title: 'Workout' + workout.id.slice(0, 4),
       user_id: userId,
       started_at: workout.startedAt,
-      finished_at: new Date().toISOString(),
+      finished_at: finishedAt,
+      total_volume: totalInfo.totalVol,
+      total_sets: totalInfo.totalSets,
+      duration_minutes: durationMinutes
     }
-  ),
+
+    return formatted
+  },
 
   optimisticMapper({workoutDraft, userId}: SaveWorkoutPayload) {
    const {id, startedAt, finishedAt} = workoutDraft

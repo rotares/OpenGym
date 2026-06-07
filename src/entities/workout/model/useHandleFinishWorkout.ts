@@ -40,10 +40,7 @@ export const useHandleFinishWorkout = ({onValidationErrors, userId}: Props) => {
 
     //pre mapping, add finishedAt field to workout
     const payload: SaveWorkoutPayload = {
-      workoutDraft: {
-        ...workout,
-        finishedAt: new Date().toISOString(),
-      },
+      workoutDraft: workout,
       userId
     }
 
