@@ -28,9 +28,10 @@ export type ExercisePreview = {
 }
 
 export type WorkoutListItem = {
+    id: string,
     title: string,
 		date: string  
-		durationMinutes: number  
+		duration: string  
 		totalVolume: number  
 		totalSets: number  
 } & {
@@ -40,20 +41,19 @@ export type WorkoutListItem = {
 export type WorkoutDetails = {
 	id: string  
 	date: string  
-	durationMinutes: number  
+	duration: string  
 	totalVolume: number  
 	totalSets: number  
 	  
 	exercises: {  
     name: string,
     totalVolume: number,
-    totalSets: number  
-  }[]
-
-	sets: {  
-    weight: number  
-    reps: number
-    order_index: number 
+    totalSets: number,
+    sets: {  
+      weight: number  
+      reps: number
+      order_index: number 
+    }[]  
   }[]
 } 
 

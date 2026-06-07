@@ -25,7 +25,7 @@ const workoutDetailsQuery = supabase.from('workouts').select(WORKOUT_DETAILS_SEL
 
 
 const WORKOUT_LIST_ITEM = 
-  ` 
+  ` id,
     title,
     duration_minutes,
     finished_at,

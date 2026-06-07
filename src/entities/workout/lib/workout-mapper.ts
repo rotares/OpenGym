@@ -1,5 +1,5 @@
 import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types";
-import { formatDate } from "@/shared/lib";
+import { formatDate, formatNumberToTime } from "@/shared/lib";
 import { z } from "zod";
 import { type SaveWorkoutPayload } from "../model/saveWorkoutMutation";
 import type { ExerciseSaving, RawWorkoutDetails, RawWorkoutListItem, WorkoutDetails, WorkoutExerciseType, WorkoutListItem, WorkoutSaving, WorkoutValidationErrors } from "../model/types";
@@ -103,13 +103,14 @@ export const workoutMapper = {
   workoutListItem(data: RawWorkoutListItem): WorkoutListItem[] {
     return data.map(w => {
       return ({
+        id: w.id,
         title: w.title,
         date: formatDate(w.finished_at),
-        durationMinutes: w.duration_minutes,
+        duration: formatNumberToTime(w.duration_minutes),
         totalVolume: w.total_volume,
         totalSets: w.total_sets,
         exercisesPreview: w.workout_exercises.map(ex => ({name:ex.exercises.name , setsCount: ex.total_sets}))
-    })
+      })
     })  
 
   },
@@ -119,21 +120,16 @@ export const workoutMapper = {
     return {
       id: data.id,
       date: formatDate(data.finished_at),
-      durationMinutes: data.duration_minutes,
+      duration: formatNumberToTime(data.duration_minutes),
       totalVolume: data.total_volume,
       totalSets: data.total_sets,
 
       exercises: data.workout_exercises.map(ex => ({
         name: ex.exercises.name,
         totalVolume: ex.total_volume,
-        totalSets: ex.total_sets
+        totalSets: ex.total_sets,
+        sets: ex.sets.flatMap(set => set)
       })),
-
-      sets: data.workout_exercises.flatMap(ex => ex.sets.map(set => ({
-        weight: Number(set.weight),
-        reps: Number(set.reps),
-        order_index: set.order_index
-      })))
     };
   }
 }
