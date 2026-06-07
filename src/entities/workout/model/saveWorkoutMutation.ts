@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
 import { workoutService } from "../api/workout-service"
-import { workoutMapper } from "../lib/workout-mapper"
 import type { WorkoutSession } from "./workout-session.types"
 import { useWorkoutStore } from "./workoutStore"
 
@@ -16,21 +15,21 @@ export const useSaveWorkoutMutation = () => {
 
     onMutate: async (variables, context) => {
 
-      await context.client.cancelQueries({queryKey: ['workouts']})
+      // await context.client.cancelQueries({queryKey: ['workouts']})
 
       //install saving status
       useWorkoutStore.getState().setStatus("saving")
 
-      const mappedData = workoutMapper.optimisticMapper(variables)
-      const prevData = context.client.getQueryData(['workouts'])
+      // const mappedData = workoutMapper.optimisticMapper(variables)
+      // const prevData = context.client.getQueryData(['workouts'])
 
-      context.client.setQueryData(['workouts'], (old: Array<unknown>) => {
-        if(!old) return
+      // context.client.setQueryData(['workouts'], (old: Array<unknown>) => {
+      //   if(!old) return
 
-        return [...old, mappedData]
-      }) 
+      //   return [...old, mappedData]
+      // }) 
       
-      return {prevData}
+      // return {prevData}
     },
 
     onSuccess: () => {
@@ -45,9 +44,9 @@ export const useSaveWorkoutMutation = () => {
       console.warn(error)
       useWorkoutStore.getState().setStatus("active")
 
-      if(onMutateResult?.prevData) {
-        context.client.setQueryData(['workouts'], onMutateResult.prevData)
-      }
+      // if(onMutateResult?.prevData) {
+      //   context.client.setQueryData(['workouts'], onMutateResult.prevData)
+      // }
     },
     
   })}
