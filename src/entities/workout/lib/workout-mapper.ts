@@ -97,5 +97,43 @@ export const workoutMapper = {
     }
 
     return errors
+  },
+
+  //mapper for list item
+  workoutListItem(data: RawWorkoutListItem): WorkoutListItem[] {
+    return data.map(w => {
+      return ({
+        title: w.title,
+        date: formatDate(w.finished_at),
+        durationMinutes: w.duration_minutes,
+        totalVolume: w.total_volume,
+        totalSets: w.total_sets,
+        exercisesPreview: w.workout_exercises.map(ex => ({name:ex.exercises.name , setsCount: ex.total_sets}))
+    })
+    })  
+
+  },
+
+  //mapper data for workout page
+ workoutDetails(data: RawWorkoutDetails): WorkoutDetails {
+    return {
+      id: data.id,
+      date: formatDate(data.finished_at),
+      durationMinutes: data.duration_minutes,
+      totalVolume: data.total_volume,
+      totalSets: data.total_sets,
+
+      exercises: data.workout_exercises.map(ex => ({
+        name: ex.exercises.name,
+        totalVolume: ex.total_volume,
+        totalSets: ex.total_sets
+      })),
+
+      sets: data.workout_exercises.flatMap(ex => ex.sets.map(set => ({
+        weight: Number(set.weight),
+        reps: Number(set.reps),
+        order_index: set.order_index
+      })))
+    };
   }
 }
