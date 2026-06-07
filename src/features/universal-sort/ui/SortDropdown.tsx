@@ -67,8 +67,7 @@ export const SortDropdown = <T,>({
           <DropdownMenuSeparator />
           <DropdownMenuItem
             variant="destructive"
-            onSelect={(e) => {
-              e.preventDefault()
+            onSelect={() => {
               resetSort()
             }}
           >
