@@ -122,18 +122,24 @@ export type Database = {
           exercise_id: string
           id: string
           order_index: number
+          total_sets: number
+          total_volume: number
           workout_id: string
         }
         Insert: {
           exercise_id: string
           id?: string
           order_index: number
+          total_sets: number
+          total_volume: number
           workout_id: string
         }
         Update: {
           exercise_id?: string
           id?: string
           order_index?: number
+          total_sets?: number
+          total_volume?: number
           workout_id?: string
         }
         Relationships: [
@@ -156,26 +162,35 @@ export type Database = {
       workouts: {
         Row: {
           created_at: string
+          duration_minutes: number
           finished_at: string
           id: string
           started_at: string
           title: string
+          total_sets: number
+          total_volume: number
           user_id: string
         }
         Insert: {
           created_at?: string
+          duration_minutes: number
           finished_at: string
           id?: string
           started_at: string
           title: string
+          total_sets: number
+          total_volume: number
           user_id: string
         }
         Update: {
           created_at?: string
+          duration_minutes?: number
           finished_at?: string
           id?: string
           started_at?: string
           title?: string
+          total_sets?: number
+          total_volume?: number
           user_id?: string
         }
         Relationships: [
