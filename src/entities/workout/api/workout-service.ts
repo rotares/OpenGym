@@ -2,6 +2,7 @@ import { supabase } from '@/shared/api';
 import { WORKOUT_DETAILS_SELECT, WORKOUT_LIST_ITEM } from '../config/query-select';
 import { workoutMapper } from '../lib/workout-mapper';
 import { type WorkoutSession } from './../model/workout-session.types';
+import { type GetWorkoutParams } from './types';
 
 export const workoutService = {
   saveWorkout: async (workoutDraft: WorkoutSession, userId: string) => {
@@ -30,9 +31,19 @@ export const workoutService = {
     return true
   },
 
-  getWorkouts: async () => {
+  getWorkouts: async ({page, pageSize}: GetWorkoutParams ) => {
+
+    //compute from and to
+    const from = page * pageSize
+    const to = from + pageSize - 1
+
     const {data, error} = await supabase.from('workouts').select(WORKOUT_LIST_ITEM
-    ).limit(3, {foreignTable: 'workout_exercises'})
+    )
+    .order('created_at', {
+      ascending: false
+    })
+    .range(from, to)
+    .limit(3, {foreignTable: 'workout_exercises'})
     
   if (error) {
     throw new Error(error.message)
