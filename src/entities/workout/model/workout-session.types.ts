@@ -51,7 +51,7 @@ export interface WorkoutExercise {
  */
 export interface WorkoutSession {
   id: string
-
+  title: string
   status: WorkoutStatus
 
   startedAt: string

@@ -3,10 +3,11 @@ import {
   type WorkoutValidationErrors,
   useHandleFinishWorkout,
 } from "@/entities/workout"
+import { PageWrapper } from "@/shared/ui/components"
 import { useState } from "react"
-import { PageWrapper } from "../../../../shared/ui/components"
 import { WorkoutSessionActionsBottomPanel } from "./WorkoutSessionActionsBottomPanel"
 import { WorkoutSessionContent } from "./WorkoutSessionContent"
+import { WorkoutSessionHeader } from "./WorkoutSessionHeader"
 export const WorkoutSessionPage = () => {
   const [exerciseErrorsIds, setExerciseErrorsIds] =
     useState<WorkoutValidationErrors>({})
@@ -21,7 +22,7 @@ export const WorkoutSessionPage = () => {
   return (
     <PageWrapper>
       <PageWrapper.Header className="flex justify-between gap-4">
-        <h1 className="text-xl">Тренировка</h1>
+        <WorkoutSessionHeader />
         <WorkoutSessionActionsBottomPanel
           handleFinishWorkout={handleFinishWorkout}
         />

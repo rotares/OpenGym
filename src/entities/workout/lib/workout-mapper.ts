@@ -56,7 +56,7 @@ export const workoutMapper = {
     const durationMinutes = Math.floor((new Date(finishedAt).valueOf() - new Date(workout.startedAt).valueOf()) / (1000 * 60))
 
     const formatted:WorkoutSaving = {
-      title: 'Workout' + workout.id.slice(0, 4),
+      title: workout.title ? workout.title : 'Тренировка',
       user_id: userId,
       started_at: workout.startedAt,
       finished_at: finishedAt,

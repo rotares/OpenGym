@@ -117,4 +117,5 @@ export interface WorkoutStore {
    */
   resetWorkout: () => void
   setStatus(newStatus: 'active' | 'saving'): void
+  setTitle: (newTitle: string) => void
 }

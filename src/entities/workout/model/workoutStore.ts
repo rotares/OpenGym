@@ -13,6 +13,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
         startWorkout: () =>
           set((state) => {
             state.workout = {
+              title: 'Тренировка',
               id: nanoid(),
               status: "active",
               startedAt: new Date().toISOString(),
@@ -113,6 +114,12 @@ export const useWorkoutStore = create<WorkoutStore>()(
           }
         }),
         
+        setTitle: (newTitle) => set((state) => {
+          if (state.workout) {
+              state.workout.title = newTitle
+          }
+        })
+
       })),
       {
         name: "workout-session",
