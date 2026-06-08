@@ -5,9 +5,9 @@ import {
   useExerciseFilters,
 } from "@/features/exercise/filters"
 
+import { SearchInput, useSearch } from "@/features/universal-search"
 import { SortDropdown, useSort } from "@/features/universal-sort"
-import { useSearch } from "@/shared/lib"
-import { PageWrapper, SearchInput } from "@/shared/ui/components"
+import { PageWrapper } from "@/shared/ui/components"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { useCallback } from "react"
 import { useNavigate } from "react-router"
