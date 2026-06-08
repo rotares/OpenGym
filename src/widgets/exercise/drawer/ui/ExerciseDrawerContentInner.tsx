@@ -3,9 +3,8 @@ import {
   ExerciseFilterModal,
   useExerciseFilters,
 } from "@/features/exercise/filters"
+import { SearchInput, useSearch } from "@/features/universal-search"
 import { SortDropdown, useSort } from "@/features/universal-sort"
-import { useSearch } from "@/shared/lib"
-import { SearchInput } from "@/shared/ui/components"
 import { DrawerHeader, DrawerTitle } from "@/shared/ui/primitives"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { memo } from "react"

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react"
-import { useDebounceValue } from "./useDebounceValue"
+import { useDebounceValue } from "../../../shared/lib/useDebounceValue"
 
 type Props<T> = {
   initialData: T[],
