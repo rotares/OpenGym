@@ -10,5 +10,5 @@ export const SORT_OPTIONS:SortOption<WorkoutListItem>[] = [{
 
 export const INITIAL_SORT_CONFIG:SortConfig<WorkoutListItem> = {
   key: 'date',
-  order: 'asc'
+  order: 'desc'
 }
