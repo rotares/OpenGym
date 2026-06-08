@@ -50,3 +50,8 @@ export * from "./skeleton"
 export { Toaster } from "./sonner"
 export { Spinner } from "./spinner"
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
+export {
+  Tooltip,
+  TooltipContent, TooltipProvider, TooltipTrigger
+} from "./tooltip"
+
