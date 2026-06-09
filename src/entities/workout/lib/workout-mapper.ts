@@ -1,8 +1,8 @@
 import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types";
 import { formatDate, formatNumberToTime } from "@/shared/lib";
 import { z } from "zod";
-import { type SaveWorkoutPayload } from "../model/saveWorkoutMutation";
 import type { ExerciseSaving, RawWorkoutDetails, RawWorkoutListItem, WorkoutDetails, WorkoutExerciseType, WorkoutListItem, WorkoutSaving, WorkoutValidationErrors } from "../model/types";
+import { type SaveWorkoutPayload } from "../model/useSaveWorkoutMutation";
 import { type WorkoutSession, } from "../model/workout-session.types";
 
 export const workoutMapper = {

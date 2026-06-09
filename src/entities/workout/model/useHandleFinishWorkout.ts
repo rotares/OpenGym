@@ -1,8 +1,8 @@
 import { useCallback } from "react"
 import { toast } from "sonner"
 import { workoutMapper, workoutSubmitSchema } from "../lib"
-import { useSaveWorkoutMutation } from "./saveWorkoutMutation"
 import { type WorkoutValidationErrors } from "./types"
+import { useSaveWorkoutMutation } from "./useSaveWorkoutMutation"
 import { type WorkoutSession } from "./workout-session.types"
 import { useWorkoutStore } from "./workoutStore"
 

@@ -29,7 +29,7 @@ export const WORKOUT_QUERIES = {
 
   detail: (id: string) => {
     return queryOptions<WorkoutDetails>({
-      queryKey: [WORKOUT_QUERIES.details(), id],
+      queryKey: [...WORKOUT_QUERIES.details(), id],
       queryFn: () => workoutService.getById(id),
       staleTime: 60 * 1000 * 5,
     })
