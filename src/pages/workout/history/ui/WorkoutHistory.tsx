@@ -1,19 +1,40 @@
 import { WORKOUT_QUERIES, WorkoutItem } from "@/entities/workout"
 import { SortDropdown, useSort } from "@/features/universal-sort"
-import { PageWrapper } from "@/shared/ui/components"
+import { cn } from "@/shared/lib"
+import { CustomSpinner, PageWrapper } from "@/shared/ui/components"
 import { Button } from "@/shared/ui/primitives"
-import { useSuspenseQuery } from "@tanstack/react-query"
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
+import { useOnInView } from "react-intersection-observer"
 import { useNavigate } from "react-router"
 import { INITIAL_SORT_CONFIG, SORT_OPTIONS } from "../config"
 
 export const WorkoutHistoryPage = () => {
-  const { data: workouts } = useSuspenseQuery(WORKOUT_QUERIES.list())
   const navigate = useNavigate()
+
+  const {
+    data: workouts,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    isRefetching,
+  } = useSuspenseInfiniteQuery(WORKOUT_QUERIES.list())
 
   const { sortedData, requestSort, currentSortConfig, resetSort } = useSort({
     data: workouts,
     initialSortConfig: INITIAL_SORT_CONFIG,
   })
+
+  //ref for trigger query
+  const ref = useOnInView(
+    (inView) => {
+      if (inView && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage()
+      }
+    },
+    {
+      rootMargin: "350px",
+    },
+  )
 
   if (workouts.length === 0) {
     return (
@@ -39,8 +60,20 @@ export const WorkoutHistoryPage = () => {
       </PageWrapper.Header>
       <PageWrapper.Content>
         {sortedData.map((workout) => (
-          <WorkoutItem workout={workout} key={workout.id} />
+          <WorkoutItem
+            onClick={() => navigate(workout.id)}
+            className={cn(
+              isRefetching && "opacity-55",
+              "duration-100 transition-opacity",
+            )}
+            workout={workout}
+            key={workout.id}
+          />
         ))}
+        {/* element with ref for trigger */}
+        {hasNextPage && (
+          <div ref={ref}>{isFetchingNextPage && <CustomSpinner />}</div>
+        )}
       </PageWrapper.Content>
     </PageWrapper>
   )

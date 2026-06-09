@@ -7,8 +7,8 @@ export const WORKOUT_QUERIES = {
   all: () => ['workouts'],
 
   list: () => {
-    return infiniteQueryOptions<WorkoutListItem[]>({
-      queryKey: WORKOUT_QUERIES.all(),
+    return infiniteQueryOptions<WorkoutListItem[], Error, WorkoutListItem[]>({
+      queryKey: [...WORKOUT_QUERIES.all()],
       queryFn: ({pageParam}) => workoutService.getWorkouts({page:pageParam as number, pageSize: PAGE_SIZE}),
       initialPageParam: 0,
       getNextPageParam: (
@@ -20,6 +20,7 @@ export const WORKOUT_QUERIES = {
         }
         return pages.length
       },
+      select: (data) => data.pages.flatMap(page => page),
       staleTime: 1000 * 60 * 5, // 5 minutes
     })
   },
