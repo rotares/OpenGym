@@ -34,7 +34,10 @@ PageWrapper.Header = ({ children, className, isCustom }) => {
 PageWrapper.Content = ({ children, className, isCustom }) => {
   return (
     <main
-      className={cn(!isCustom && "no-scrollbar overflow-y-auto", className)}
+      className={cn(
+        !isCustom && "no-scrollbar pt-2 overflow-y-auto",
+        className,
+      )}
     >
       {children}
     </main>

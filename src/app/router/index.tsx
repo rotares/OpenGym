@@ -42,6 +42,11 @@ const NotFoundPrivatePage = LazyPage(
   "NotFoundPrivatePage",
 )
 
+const WorkoutDetailsPage = LazyPage(
+  () => import("@/pages/workout/details"),
+  "WorkoutDetailsPage",
+)
+
 const routeConfig = createBrowserRouter([
   {
     Component: PublicLayout,
@@ -72,7 +77,16 @@ const routeConfig = createBrowserRouter([
             children: [
               {
                 path: "workouts-history",
-                Component: WorkoutsHistoryPage,
+                children: [
+                  {
+                    Component: WorkoutsHistoryPage,
+                    index: true,
+                  },
+                  {
+                    path: ":id",
+                    Component: WorkoutDetailsPage,
+                  },
+                ],
               },
               {
                 Component: WorkoutPage,
@@ -84,12 +98,6 @@ const routeConfig = createBrowserRouter([
                   {
                     index: true,
                     Component: ExerciseListPage,
-                    // handle: {
-                    //   header: {
-                    //     title: "Упражнения",
-                    //     actions: <SearchBar />,
-                    //   },
-                    // } as RouteHandle,
                   },
                   {
                     path: ":id",
@@ -106,11 +114,6 @@ const routeConfig = createBrowserRouter([
               {
                 Component: UserProfilePage,
                 path: "profile",
-                // handle: {
-                //   pageHeader: {
-                //     title: "Ваш профиль",
-                //   },
-                // },
               },
             ],
           },
