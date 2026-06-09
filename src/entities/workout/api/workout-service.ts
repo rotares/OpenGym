@@ -65,5 +65,17 @@ export const workoutService = {
     const mappedData = workoutMapper.workoutDetails(data)
     return mappedData
 
+  },
+
+  async deleteWorkout(id: string): Promise<boolean> {
+    const { error } = await supabase.from('workouts')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    
+    return true;
   }
 }
