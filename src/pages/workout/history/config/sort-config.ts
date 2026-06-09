@@ -1,5 +1,5 @@
 
-import type { WorkoutListItem } from "@/entities/workout/model/types";
+import type { WorkoutListItem } from "@/entities/workout";
 import { type SortConfig, type SortOption } from "@/features/universal-sort";
 
 
