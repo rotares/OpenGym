@@ -1,5 +1,10 @@
-import { useDeleteWorkoutMutation, WORKOUT_QUERIES } from "@/entities/workout"
-import { PageWrapper } from "@/shared/ui/components"
+import {
+  useDeleteWorkoutMutation,
+  useWorkoutStore,
+  WORKOUT_QUERIES,
+  workoutMapper,
+} from "@/entities/workout"
+import { CustomSpinner, PageWrapper } from "@/shared/ui/components"
 import {
   Button,
   DropdownMenu,
@@ -22,14 +27,25 @@ import { ExerciseCard } from "./ExerciseCard"
 import { StatCard } from "./StatCard"
 
 export const WorkoutDetailsPage = () => {
+  const editWorkout = useWorkoutStore((s) => s.editWorkout)
+
   const { id } = useParams()
-  const { data: workout } = useSuspenseQuery(WORKOUT_QUERIES.detail(id!))
+  const { data: workout, isRefetching } = useSuspenseQuery(
+    WORKOUT_QUERIES.detail(id!),
+  )
   const { mutate } = useDeleteWorkoutMutation()
   const navigate = useNavigate()
 
   const handleDelete = () => {
     mutate(workout.id)
     navigate("/workouts-history")
+  }
+
+  const handleEdit = () => {
+    //map details data to workout session store
+    const mappedToWorkoutDraft = workoutMapper.detailsToWorkoutSession(workout)
+    editWorkout(mappedToWorkoutDraft)
+    navigate("/workout-session")
   }
 
   return (
@@ -60,6 +76,12 @@ export const WorkoutDetailsPage = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent side="left" align="center">
+                <DropdownMenuItem
+                  onClick={handleEdit}
+                  className="text-amber-200/80"
+                >
+                  Редактировать
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleDelete} variant="destructive">
                   Удалить
                 </DropdownMenuItem>
@@ -70,6 +92,7 @@ export const WorkoutDetailsPage = () => {
       </PageWrapper.Header>
       <PageWrapper.Content className="space-y-6">
         {/* Блок суммарной статистики тренировки */}
+        {isRefetching && <CustomSpinner />}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <StatCard
             icon={Dumbbell}

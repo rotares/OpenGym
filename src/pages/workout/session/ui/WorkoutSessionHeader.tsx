@@ -1,13 +1,15 @@
 import { useWorkoutStore } from "@/entities/workout"
 import { Input } from "@/shared/ui/primitives"
+import { CircleAlert } from "lucide-react"
 import { useShallow } from "zustand/shallow"
 
 export const WorkoutSessionHeader = () => {
-  const { setTitle, isActiveWorkout, title } = useWorkoutStore(
+  const { setTitle, isActiveWorkout, title, isEdit } = useWorkoutStore(
     useShallow((s) => ({
       setTitle: s.setTitle,
       isActiveWorkout: s.workout,
       title: s.workout?.title,
+      isEdit: s.mode === "edit",
     })),
   )
 
@@ -29,6 +31,12 @@ export const WorkoutSessionHeader = () => {
           onChange={onHandleChange}
           placeholder="Название тренировки..."
         />
+      )}
+      {isEdit && (
+        <div className="text-xs flex gap-3 items-center">
+          <CircleAlert className="text-yellow-200" />
+          Вы редактируете тренировку
+        </div>
       )}
     </>
   )

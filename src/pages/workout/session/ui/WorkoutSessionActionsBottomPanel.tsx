@@ -4,12 +4,13 @@ import { ExerciseDrawer } from "@/widgets/exercise/drawer"
 import { Check, Plus, X } from "lucide-react"
 import { memo } from "react"
 import { useShallow } from "zustand/shallow"
+
 type Props = {
-  handleFinishWorkout: () => void
+  onSaveHandler: () => void
 }
 
 export const WorkoutSessionActionsBottomPanel = memo(
-  ({ handleFinishWorkout }: Props) => {
+  ({ onSaveHandler }: Props) => {
     const { status, addExercise, cancelWorkout, startWorkout, isEmptyWorkout } =
       useWorkoutStore(
         useShallow((s) => ({
@@ -26,7 +27,7 @@ export const WorkoutSessionActionsBottomPanel = memo(
         {status === "active" || status === "saving" ? (
           <div className="flex gap-4 justify-center">
             <ExerciseDrawer onAdd={addExercise} />
-            <Button disabled={isEmptyWorkout} onClick={handleFinishWorkout}>
+            <Button disabled={isEmptyWorkout} onClick={onSaveHandler}>
               <Check />
               <span className="sr-only">Завершить тренировку</span>
             </Button>

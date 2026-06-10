@@ -6,7 +6,7 @@ import { type WorkoutListItem } from "../../model/types"
 type Props = {
   workout: WorkoutListItem
   className?: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const WorkoutItem = memo(({ workout, className, onClick }: Props) => {
