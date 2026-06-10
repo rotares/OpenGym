@@ -1,8 +1,8 @@
 import { type WorkoutExercise } from "@/entities/workout/model/workout-session.types";
 import { formatDate, formatNumberToTime } from "@/shared/lib";
+import { nanoid } from "nanoid";
 import { z } from "zod";
 import type { ExerciseSaving, RawWorkoutDetails, RawWorkoutListItem, WorkoutDetails, WorkoutExerciseType, WorkoutListItem, WorkoutSaving, WorkoutValidationErrors } from "../model/types";
-import { type SaveWorkoutPayload } from "../model/useSaveWorkoutMutation";
 import { type WorkoutSession, } from "../model/workout-session.types";
 
 export const workoutMapper = {
@@ -68,16 +68,16 @@ export const workoutMapper = {
     return formatted
   },
 
-  optimisticMapper({workoutDraft, userId}: SaveWorkoutPayload) {
-   const {id, startedAt, finishedAt} = workoutDraft
-   return {
-    title: 'newWorkout',
-    id,
-    startedAt,
-    finishedAt,
-    user_id: userId
-   }
-  },
+  // optimisticMapper({workoutDraft, userId}: SaveWorkoutPayload) {
+  //  const {id, startedAt, finishedAt} = workoutDraft
+  //  return {
+  //   title: 'newWorkout',
+  //   id,
+  //   startedAt,
+  //   finishedAt,
+  //   user_id: userId
+  //  }
+  // },
 
   //validation error mapper - преобразует ошибки валидации в удобный для отображения формат
   validateErrorMapper(workout: WorkoutSession, issues: z.core.$ZodIssue[]):WorkoutValidationErrors {
@@ -119,17 +119,43 @@ export const workoutMapper = {
  workoutDetails(data: RawWorkoutDetails): WorkoutDetails {
     return {
       id: data.id,
+      title: data.title,
       date: formatDate(data.finished_at),
       duration: formatNumberToTime(data.duration_minutes),
       totalVolume: data.total_volume,
       totalSets: data.total_sets,
 
       exercises: data.workout_exercises.map(ex => ({
+        exerciseId: ex.exercise_id,
         name: ex.exercises.name,
         totalVolume: ex.total_volume,
         totalSets: ex.total_sets,
         sets: ex.sets.flatMap(set => set)
       })),
     };
+  },
+
+  //map for edit 
+  detailsToWorkoutSession(workoutDetails: WorkoutDetails): WorkoutSession {
+
+    const exercises = workoutDetails.exercises.map(ex => {
+      return {
+        id: nanoid(),
+        exerciseId: ex.exerciseId,
+        name: ex.name,
+        sets: ex.sets.map(set => ({id:nanoid(), reps: String(set.reps), weight: String(set.weight), completed: true}))
+      }
+    })
+
+    const mappedData:WorkoutSession = {
+      id: workoutDetails.id,
+      title: workoutDetails.title,
+      status: "active",
+      startedAt: '',
+      finishedAt: null,
+        exercises
+      }
+      
+    return mappedData
   }
 }
