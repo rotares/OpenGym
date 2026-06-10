@@ -31,6 +31,40 @@ export const workoutService = {
     return true
   },
 
+  updateWorkout: async (workoutDraft: WorkoutSession) => {
+
+    const formattedWorkoutPayload = workoutMapper.finishMapper(workoutDraft, '')
+    //update workout
+    await supabase.from('workouts')
+      .update({title: formattedWorkoutPayload.title, total_sets: formattedWorkoutPayload.total_sets, total_volume: formattedWorkoutPayload.total_volume}) 
+      .eq('id', workoutDraft.id)
+
+    //get id's of saved exercises
+    const {data: savedExercises} = await supabase.from('workout_exercises').select('id').eq('workout_id', workoutDraft.id)
+
+    //delete all sets
+    await supabase.from('sets').delete().in('workout_exercise_id', savedExercises?.map(ex => ex.id) as readonly string[])
+    //delete all exercises
+    await supabase.from('workout_exercises').delete().eq('workout_id', workoutDraft.id)
+
+    //Mapper of exercises
+    const exercisesPayload = workoutMapper.exerciseMap(workoutDraft.exercises, workoutDraft.id)
+
+    // Insert exercises and get their ids
+    const {data: insertedExercises } = await supabase
+      .from("workout_exercises")
+      .insert(exercisesPayload)
+      .select()
+    
+    //sets mapper
+    const setsPayload = workoutMapper.setsMapper(insertedExercises!, workoutDraft.exercises)  
+ 
+    await supabase.from("sets").insert(setsPayload)
+
+    return true
+  },
+
+
   getWorkouts: async ({page, pageSize}: GetWorkoutParams ) => {
 
     //compute from and to

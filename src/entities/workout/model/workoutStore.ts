@@ -4,11 +4,14 @@ import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { type WorkoutStore } from "./types";
 
+
 export const useWorkoutStore = create<WorkoutStore>()(
   devtools(
     persist(
       immer((set) => ({
         workout: null,
+        //add mode
+        mode: null,
 
         startWorkout: () =>
           set((state) => {
@@ -20,11 +23,20 @@ export const useWorkoutStore = create<WorkoutStore>()(
               finishedAt: null,
               exercises: [],
             }
+            state.mode = 'create'
           }),
+        
+        editWorkout: (workoutDraft) => {
+          set((state) => {
+            state.workout = workoutDraft
+            state.mode = 'edit'
+          })
+        },
 
         cancelWorkout: () =>
           set((state) => {
             state.workout = null
+            state.mode = null
           }),
 
         addExercise: (exercise) =>
@@ -106,6 +118,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
         resetWorkout: () =>
           set((state) => {
             state.workout = null
+            state.mode = null
           }),
 
         setStatus: (newStatus) => set((state) => {
