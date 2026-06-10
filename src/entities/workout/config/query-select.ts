@@ -8,6 +8,7 @@ const WORKOUT_DETAILS_SELECT = `
     total_volume,
     total_sets,
     workout_exercises (
+      exercise_id,
       total_sets,
       total_volume,
       exercises (

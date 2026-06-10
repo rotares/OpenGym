@@ -39,13 +39,15 @@ export type WorkoutListItem = {
 }
 
 export type WorkoutDetails = {
-	id: string  
+	id: string
+  title: string,
 	date: string  
 	duration: string  
 	totalVolume: number  
 	totalSets: number  
-	  
+	
 	exercises: {  
+    exerciseId: string,
     name: string,
     totalVolume: number,
     totalSets: number,
@@ -85,11 +87,13 @@ export interface WorkoutStore {
    * Current active workout
    */
   workout: WorkoutSession | null
+  mode: 'create' | 'edit' | null
 
   /**
    * Workout lifecycle
    */
   startWorkout: () => void
+  editWorkout: (workoutDraft: WorkoutSession) => void
   cancelWorkout: () => void
   
 
