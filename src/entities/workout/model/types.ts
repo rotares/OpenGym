@@ -45,7 +45,6 @@ export type WorkoutDetails = {
 	duration: string  
 	totalVolume: number  
 	totalSets: number  
-	
 	exercises: {  
     exerciseId: string,
     name: string,

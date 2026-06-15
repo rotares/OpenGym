@@ -13,12 +13,18 @@ export const workoutMapper = {
       return exercise.sets.reduce((acc, {weight}) => Number(weight) + acc , 0)
     } 
 
+    const getTotalReps = (exercise: WorkoutExercise) => {
+      return exercise.sets.reduce((acc, {reps}) => Number(reps) + acc , 0)
+    }
+    
+
     return exercises.map((exercise, index) => ({
       workout_id: workoutId,
       exercise_id: exercise.exerciseId,
       order_index: index,
       total_sets: exercise.sets.length,
       total_volume: getTotalVolume(exercise),
+      total_reps: getTotalReps(exercise)
     }))
   },
 
@@ -48,9 +54,11 @@ export const workoutMapper = {
         res.totalSets += sets.length
         const totalVol = sets.reduce((acc, {weight}) => acc + Number(weight), 0)
         res.totalVol += totalVol
+        
+        res.totalReps = sets.reduce((acc, {reps}) => acc + Number(reps), 0)
 
         return res
-    }, {totalSets:0, totalVol:0})
+    }, {totalSets:0, totalVol:0, totalReps: 0})
 
     const finishedAt = new Date().toISOString()
     const durationMinutes = Math.floor((new Date(finishedAt).valueOf() - new Date(workout.startedAt).valueOf()) / (1000 * 60))
@@ -62,22 +70,12 @@ export const workoutMapper = {
       finished_at: finishedAt,
       total_volume: totalInfo.totalVol,
       total_sets: totalInfo.totalSets,
-      duration_minutes: durationMinutes
+      duration_minutes: durationMinutes,
+      total_reps: totalInfo.totalReps,
     }
 
     return formatted
   },
-
-  // optimisticMapper({workoutDraft, userId}: SaveWorkoutPayload) {
-  //  const {id, startedAt, finishedAt} = workoutDraft
-  //  return {
-  //   title: 'newWorkout',
-  //   id,
-  //   startedAt,
-  //   finishedAt,
-  //   user_id: userId
-  //  }
-  // },
 
   //validation error mapper - преобразует ошибки валидации в удобный для отображения формат
   validateErrorMapper(workout: WorkoutSession, issues: z.core.$ZodIssue[]):WorkoutValidationErrors {
@@ -124,7 +122,7 @@ export const workoutMapper = {
       duration: formatNumberToTime(data.duration_minutes),
       totalVolume: data.total_volume,
       totalSets: data.total_sets,
-
+      
       exercises: data.workout_exercises.map(ex => ({
         exerciseId: ex.exercise_id,
         name: ex.exercises.name,

@@ -122,6 +122,7 @@ export type Database = {
           exercise_id: string
           id: string
           order_index: number
+          total_reps: number
           total_sets: number
           total_volume: number
           workout_id: string
@@ -130,6 +131,7 @@ export type Database = {
           exercise_id: string
           id?: string
           order_index: number
+          total_reps: number
           total_sets: number
           total_volume: number
           workout_id: string
@@ -138,6 +140,7 @@ export type Database = {
           exercise_id?: string
           id?: string
           order_index?: number
+          total_reps?: number
           total_sets?: number
           total_volume?: number
           workout_id?: string
@@ -167,6 +170,7 @@ export type Database = {
           id: string
           started_at: string
           title: string
+          total_reps: number
           total_sets: number
           total_volume: number
           user_id: string
@@ -178,6 +182,7 @@ export type Database = {
           id?: string
           started_at: string
           title: string
+          total_reps: number
           total_sets: number
           total_volume: number
           user_id: string
@@ -189,6 +194,7 @@ export type Database = {
           id?: string
           started_at?: string
           title?: string
+          total_reps?: number
           total_sets?: number
           total_volume?: number
           user_id?: string
