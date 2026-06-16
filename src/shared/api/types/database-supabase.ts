@@ -214,7 +214,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_workout_stats: {
+        Args: { p_end_date?: string; p_start_date?: string }
+        Returns: {
+          total_reps: number
+          total_sets: number
+          total_volume: number
+          workouts_count: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
