@@ -1,7 +1,7 @@
-import type { PeriodRange } from "@/entities/workout-stats"
 import { addMonths, addWeeks, addYears, endOfMonth, endOfWeek, endOfYear, isSameMonth, isSameWeek, isSameYear, startOfMonth, startOfWeek, startOfYear, subMonths, subWeeks, subYears } from "date-fns"
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { formatPeriodLabel } from "../utils"
+import type { PeriodRange } from "./types"
 
 export const strategy = {
   week: {
@@ -27,11 +27,12 @@ export const strategy = {
   }
 } as const
 
-export const useStatsPeriod = () => {
+export const usePeriodNavigation = () => {
   const [range, setRange] = useState<PeriodRange>("week")
   const [anchorDate, setAnchorDate] = useState(new Date())
 
   const canNavigate = useMemo(() => range !== "all", [range])
+  const isArrowsHidden = range === 'all'
 
   const {startDate, endDate, currentStrategy, isCurrentPeriod} = useMemo(() => {
 
@@ -60,11 +61,10 @@ export const useStatsPeriod = () => {
   }, [startDate, endDate, range])
 
 
-  const resetDate = () => {
+  const resetDate = useCallback(() => {
     setRange('week')
     setAnchorDate(new Date())
-
-  }
+  }, [])
 
   return {
     range,
@@ -75,6 +75,7 @@ export const useStatsPeriod = () => {
     navigatePeriod,
     periodLabel,
     isCurrentPeriod,
-    resetDate
+    resetDate,
+    isArrowsHidden
   }
 }

@@ -1,6 +1,6 @@
-import type { PeriodRange } from "@/entities/workout-stats";
 import { format } from "date-fns";
 import { ru } from 'date-fns/locale';
+import type { PeriodRange } from "../model";
 
 export const formatPeriodLabel = (range: PeriodRange, start: Date | null, end: Date | null) => {
   if (range === "all") return "Все время"
