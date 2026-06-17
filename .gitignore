@@ -25,7 +25,3 @@ dist-ssr
 
 ## Custom rules
 .md
-
-##ignore tests
-*.test*
-*.spec*
