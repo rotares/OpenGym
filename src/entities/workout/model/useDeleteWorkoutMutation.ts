@@ -28,7 +28,7 @@ export const useDeleteWorkoutMutation = () => {
 
     },
 
-    onSuccess: (data, variables, onMutateResult, context) => {
+    onSuccess: (_, variables, __, context) => {
       context.client.removeQueries({
         queryKey: ['workouts','details', variables]
       })

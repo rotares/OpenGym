@@ -79,10 +79,10 @@ export const workoutService = {
     .range(from, to)
     .limit(3, {foreignTable: 'workout_exercises'})
     
-  if (error) {
-    throw new Error(error.message)
-  }
-    
+    if (error) {
+      throw new Error(error.message)
+    }
+      
     const mappedData = workoutMapper.workoutListItem(data)
     return mappedData
   },
