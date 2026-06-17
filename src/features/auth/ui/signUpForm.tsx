@@ -60,6 +60,7 @@ const StepNavigation = ({ isPending }: { isPending: boolean }) => {
           className="flex-1"
           onClick={next}
           variant="outline"
+          data-testid="nextStep"
         >
           Next Step
         </Button>
@@ -73,6 +74,7 @@ const StepNavigation = ({ isPending }: { isPending: boolean }) => {
             prev()
           }}
           variant="outline"
+          data-testid="prevStep"
         >
           <span className="sr-only">Back to first step</span>
           <ArrowLeft />
@@ -85,6 +87,7 @@ const StepNavigation = ({ isPending }: { isPending: boolean }) => {
           type="submit"
           variant="outline"
           className="flex-1"
+          data-testid="registerBtn"
         >
           {isPending ? <Spinner /> : "Sign Up !"}
         </Button>

@@ -21,6 +21,7 @@ export const SignInForm = () => {
         <FieldError
           className="text-center absolute text-xs left-1/2 -translate-x-1/2"
           children={errors.root.serverError.message}
+          data-testid="serverError"
         />
       )}
       <FieldSet>
