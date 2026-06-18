@@ -9,25 +9,18 @@ import {
 } from "@/shared/ui/primitives"
 import { Trash } from "lucide-react"
 import { memo } from "react"
+import { type updateSetHandler } from "../model"
 
 type Props = {
   set: WorkoutSet
   index: number
-  exerciseId: string
-  onUpdate: (
-    exerciseId: string,
-    setId: string,
-    param: "weight" | "reps" | "completed",
-    newValue: string | boolean,
-  ) => void
-  onRemove: (exerciseId: string, setId: string) => void
+  onUpdate: updateSetHandler
+  onRemove: (setId: string) => void
 }
 
 export const EditorSetRow = memo(
-  ({ set, index, exerciseId, onUpdate, onRemove }: Props) => {
+  ({ set, index, onUpdate, onRemove }: Props) => {
     const { reps, weight, id: setId, completed } = set
-
-    console.log()
 
     return (
       <FieldGroup className="grid grid-cols-[2.5rem_1fr_1fr_2.5rem_auto] gap-2 sm:gap-3 py-1.5 items-center rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
@@ -42,7 +35,7 @@ export const EditorSetRow = memo(
         <Field className="relative">
           <Input
             onChange={({ currentTarget }) =>
-              onUpdate(exerciseId, setId, "weight", currentTarget.value)
+              onUpdate(setId, "weight", currentTarget.value)
             }
             id={"weight" + setId}
             value={weight}
@@ -60,7 +53,7 @@ export const EditorSetRow = memo(
         <Field className="relative">
           <Input
             onChange={({ currentTarget }) =>
-              onUpdate(exerciseId, setId, "reps", currentTarget.value)
+              onUpdate(setId, "reps", currentTarget.value)
             }
             id={"reps" + setId}
             value={reps}
@@ -79,9 +72,7 @@ export const EditorSetRow = memo(
           <Checkbox
             className="h-8 w-8 rounded-lg border-slate-200 dark:border-slate-800 data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 transition-all shadow-2xs"
             checked={completed}
-            onCheckedChange={() =>
-              onUpdate(exerciseId, setId, "completed", !completed)
-            }
+            onCheckedChange={() => onUpdate(setId, "completed", !completed)}
             id={"completed" + setId}
           />
           <FieldLabel htmlFor={"completed" + setId} className="sr-only" />
@@ -91,8 +82,7 @@ export const EditorSetRow = memo(
         <Field>
           <Button
             onClick={() => {
-              console.log("remove", exerciseId, setId)
-              onRemove(exerciseId, setId)
+              onRemove(setId)
             }}
             variant="destructive"
             size="icon"

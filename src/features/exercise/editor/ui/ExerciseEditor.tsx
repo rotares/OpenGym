@@ -1,4 +1,4 @@
-import { type WorkoutExercise, useWorkoutStore } from "@/entities/workout/"
+import { type WorkoutExercise } from "@/entities/workout/"
 import { cn } from "@/shared/lib"
 import {
   Button,
@@ -15,7 +15,7 @@ import {
 } from "@/shared/ui/primitives"
 import { Ellipsis, Plus, Trash } from "lucide-react"
 import { memo } from "react"
-import { useShallow } from "zustand/shallow"
+import { useEditorStoreHandlers } from "../model"
 import { EditorSetRow } from "./EditorSetRow"
 //пропсы - упражнение, колбек на удаление, добавление сета
 
@@ -27,39 +27,14 @@ type Props = {
 //слишком толстый компонент SPR НАРУШЕНО
 
 export const ExerciseEditor = memo(({ exercise, hasError }: Props) => {
-  const { updateSet, removeExercise, addSet, removeSet } = useWorkoutStore(
-    useShallow((s) => ({
-      updateSet: s.updateSet,
-      removeExercise: s.removeExercise,
-      addSet: s.addSet,
-      removeSet: s.removeSet,
-    })),
-  )
-
   const { name, sets, id: exerciseId } = exercise
 
-  // Обновление параметров сета
-  const handleUpdateSet = (
-    exerciseId: string,
-    setId: string,
-    param: "weight" | "reps" | "completed",
-    newValue: string | boolean,
-  ) => {
-    updateSet({
-      exerciseId,
-      setId,
-      changes: { [param]: newValue },
-    })
-  }
-
-  // Удаление сета или всего упражнения, если сет был последним
-  const handleRemoveSet = (exerciseId: string, setId: string) => {
-    if (exercise.sets.length === 1) {
-      removeExercise(exerciseId)
-    } else {
-      removeSet(exerciseId, setId)
-    }
-  }
+  const {
+    addSetHandler,
+    removeExerciseHandler,
+    updateSetHandler,
+    removeSetHandler,
+  } = useEditorStoreHandlers(exerciseId)
 
   return (
     <Card
@@ -94,12 +69,12 @@ export const ExerciseEditor = memo(({ exercise, hasError }: Props) => {
               className="dark:bg-slate-950 border-slate-100 dark:border-slate-900"
             >
               <DropdownMenuItem
-                onClick={() => removeExercise(exerciseId)}
+                onClick={removeExerciseHandler}
                 variant="destructive"
                 className="text-xs font-medium"
               >
                 <Trash className="w-3.5 h-3.5 mr-2" />
-                Удалить упражнение
+                Удалить
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -123,9 +98,8 @@ export const ExerciseEditor = memo(({ exercise, hasError }: Props) => {
               key={set.id}
               set={set}
               index={index}
-              exerciseId={exerciseId}
-              onUpdate={handleUpdateSet}
-              onRemove={handleRemoveSet}
+              onUpdate={updateSetHandler}
+              onRemove={removeSetHandler}
             />
           ))}
         </div>
@@ -135,7 +109,7 @@ export const ExerciseEditor = memo(({ exercise, hasError }: Props) => {
       <CardFooter className="p-4 pt-0">
         <Button
           variant="outline"
-          onClick={() => addSet(exerciseId)}
+          onClick={addSetHandler}
           className="w-full h-10 border-dashed border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900/50 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all rounded-xl"
         >
           <Plus className="w-4 h-4 mr-1.5" />
