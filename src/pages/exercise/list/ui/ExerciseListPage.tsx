@@ -66,7 +66,12 @@ export const ExerciseListPage = () => {
         />
       </PageWrapper.Header>
       <PageWrapper.Content>
-        <ExerciseList exercises={sortedData} onNavigate={onClick} />
+        <ExerciseList
+          exercises={sortedData}
+          onNavigate={onClick}
+          itemGroupClassName="grid lg:grid-cols-2"
+          itemType={"large"}
+        />
       </PageWrapper.Content>
     </PageWrapper>
   )

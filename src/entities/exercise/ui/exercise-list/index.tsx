@@ -2,17 +2,25 @@ import { ItemGroup } from "@/shared/ui/primitives"
 import { motion } from "framer-motion"
 import { memo, useCallback } from "react"
 import { type ExerciseType } from "../../model/exercise-types"
-import { ExerciseItem } from "../exercise-item"
+import { ExerciseItem, type ItemType } from "../exercise-item"
 
 type ExerciseListType = {
   exercises: ExerciseType[]
   onAdd?: (exercise: ExerciseType) => void
   onNavigate?: (id: string) => void
+  itemGroupClassName?: string
+  itemType?: ItemType
 }
 
 //list of exercise
 export const ExerciseList = memo(
-  ({ exercises, onAdd, onNavigate }: ExerciseListType) => {
+  ({
+    exercises,
+    onAdd,
+    onNavigate,
+    itemGroupClassName,
+    itemType = "default",
+  }: ExerciseListType) => {
     const handleOnClick = useCallback(
       (exercise: ExerciseType) => {
         onNavigate?.(exercise.id)
@@ -22,7 +30,7 @@ export const ExerciseList = memo(
     )
     return (
       <motion.div
-        className="text-center text-muted-foreground"
+        className="px-2 text-center text-muted-foreground"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
@@ -33,13 +41,14 @@ export const ExerciseList = memo(
             <span>Ничего не найдено</span>
           </div>
         ) : (
-          <ItemGroup>
+          <ItemGroup className={itemGroupClassName}>
             {exercises.map((exercise) => (
               <ExerciseItem
                 key={exercise.id}
                 name={exercise.name}
                 muscle_group_name={exercise.muscle_group_name}
                 onClick={() => handleOnClick(exercise)}
+                itemType={itemType}
               />
             ))}
           </ItemGroup>

@@ -60,7 +60,7 @@ export const ExerciseDrawerContentInner = memo(({ onAdd }: DrawerProps) => {
         </div>
       </DrawerHeader>
       <div className="no-scrollbar overflow-y-auto h-full">
-        <ExerciseList onAdd={onAdd} exercises={sortedData!} />
+        <ExerciseList itemType="large" onAdd={onAdd} exercises={sortedData!} />
       </div>
     </>
   )
