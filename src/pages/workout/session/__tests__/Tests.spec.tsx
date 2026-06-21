@@ -1,8 +1,19 @@
 import { exerciseService } from "@/entities/exercise/api/exercise-service"
+import { useWorkoutStore } from "@/entities/workout"
+import * as useSubmitMutationWorkoutModule from "@/entities/workout/model/useSubmitWorkoutMutation"
+import { USER_MOCK } from "@/tests/mocks/user"
 import { renderWithProviders } from "@/tests/TestUtils"
-import { render, screen } from "@testing-library/react"
+import { act, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { createMemoryRouter, RouterProvider } from "react-router"
 import { WorkoutSessionActionsBottomPanel } from "../ui/WorkoutSessionActionsBottomPanel"
+
+//мок сервисов
+vi.mock("@/entities/user/model/useUser", () => ({
+  useUser: () => USER_MOCK,
+}))
+
+import { WorkoutSessionPage } from "../ui/WorkoutSessionPage"
 
 describe(`Тесты для btn action's `, () => {
   test("после старта отображаются action кнопки", async () => {
@@ -164,5 +175,93 @@ describe(`Тесты для btn action's `, () => {
     )
 
     expect(await screen.findByText(/Тяга верхнего блока/i)).toBeInTheDocument()
+  })
+})
+
+describe("Сценарий добавления тренировок", () => {
+  test("Добавляем тренировку и сохраняем, получаем ошибку, проверить карточки", async () => {
+    const exerciseMock = {
+      id: "testExerciseId",
+      name: "Тяга верхнего блока",
+    }
+
+    //мок сервиса тренировок
+    const router = createMemoryRouter(
+      [
+        {
+          Component: WorkoutSessionPage,
+          path: "/workout-session",
+        },
+      ],
+      {
+        initialEntries: ["/workout-session"],
+      },
+    )
+
+    renderWithProviders(<RouterProvider router={router} />, { toaster: true })
+    expect(await screen.findByText("Тренировка")).toBeInTheDocument()
+
+    await userEvent.click(
+      screen.getByRole("button", { name: /Начать тренировку/i }),
+    )
+
+    act(() => useWorkoutStore.getState().addExercise(exerciseMock))
+
+    expect(screen.getByText(exerciseMock.name)).toBeInTheDocument()
+
+    expect(await screen.findByText(/Добавить подход/i)).toBeInTheDocument()
+    await userEvent.click(screen.getByTestId("finish"))
+
+    expect(await screen.findByText(/Ошибка, проверьте карточки упражнений/i))
+  })
+
+  test("Добавляем тренировку и сохраняем, видимо toast с успешным сообщением сохранения", async () => {
+    const exerciseMock = {
+      id: "testExerciseId",
+      name: "Тяга верхнего блока",
+    }
+
+    //мок сервиса тренировок
+    const router = createMemoryRouter(
+      [
+        {
+          Component: WorkoutSessionPage,
+          path: "/workout-session",
+        },
+      ],
+      {
+        initialEntries: ["/workout-session"],
+      },
+    )
+
+    //мок хука useSubmitWorkoutMutation
+    const mutationSpy = vi
+      .spyOn(useSubmitMutationWorkoutModule, "useSubmitWorkoutMutation")
+      .mockImplementation(() => {
+        return {
+          mutateAsync: vi.fn().mockResolvedValue(true),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any
+      })
+
+    renderWithProviders(<RouterProvider router={router} />, { toaster: true })
+    expect(await screen.findByText("Тренировка")).toBeInTheDocument()
+
+    await userEvent.click(
+      screen.getByRole("button", { name: /Начать тренировку/i }),
+    )
+
+    act(() => useWorkoutStore.getState().addExercise(exerciseMock))
+
+    expect(screen.getByText(exerciseMock.name)).toBeInTheDocument()
+
+    await userEvent.type(screen.getByTestId("weightInput"), "20")
+    await userEvent.type(screen.getByTestId("repsInput"), "5")
+    await userEvent.click(screen.getByTestId("setCompleteCheckbox"))
+    await userEvent.click(screen.getByTestId("finish"))
+
+    expect(await screen.findByText(/Тренировка сохранена!/i))
+
+    mutationSpy.mockRestore()
   })
 })
