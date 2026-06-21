@@ -34,6 +34,7 @@ export const EditorSetRow = memo(
         {/* Инпут: Вес */}
         <Field className="relative">
           <Input
+            data-testid="weightInput"
             onChange={({ currentTarget }) =>
               onUpdate(setId, "weight", currentTarget.value)
             }
@@ -52,6 +53,7 @@ export const EditorSetRow = memo(
         {/* Инпут: Повторения */}
         <Field className="relative">
           <Input
+            data-testid="repsInput"
             onChange={({ currentTarget }) =>
               onUpdate(setId, "reps", currentTarget.value)
             }
@@ -70,6 +72,7 @@ export const EditorSetRow = memo(
         {/* Чекбокс выполнения */}
         <Field className="flex justify-center">
           <Checkbox
+            data-testid="setCompleteCheckbox"
             className="h-8 w-8 rounded-lg border-slate-200 dark:border-slate-800 data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 transition-all shadow-2xs"
             checked={completed}
             onCheckedChange={() => onUpdate(setId, "completed", !completed)}

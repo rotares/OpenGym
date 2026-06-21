@@ -27,7 +27,11 @@ export const WorkoutSessionActionsBottomPanel = memo(
         {status === "active" || status === "saving" ? (
           <div className="flex gap-4 justify-center">
             <ExerciseDrawer onAdd={addExercise} />
-            <Button disabled={isEmptyWorkout} onClick={onSaveHandler}>
+            <Button
+              data-testid="finish"
+              disabled={isEmptyWorkout}
+              onClick={onSaveHandler}
+            >
               <Check />
               <span className="sr-only">Завершить тренировку</span>
             </Button>
