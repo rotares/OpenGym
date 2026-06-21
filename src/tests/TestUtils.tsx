@@ -4,7 +4,7 @@ import { type ReactElement } from "react"
 import { Providers } from "./Providers"
 
 type RenderOptions = {
-  withRouter?: boolean
+  toaster?: boolean
   initialEntries?: string[]
 }
 

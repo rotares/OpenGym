@@ -1,7 +1,14 @@
 import { AuthProvider } from "@/app/providers/auth-provider"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Suspense } from "react"
+import { Toaster } from "sonner"
 
-export const Providers = ({ children }: { children: React.ReactNode }) => {
+type ProvidersProps = {
+  children: React.ReactNode
+  toaster?: boolean
+}
+
+export const Providers = ({ children, toaster = false }: ProvidersProps) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -15,7 +22,12 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <Suspense fallback={null}>
+          {children}
+          {toaster && <Toaster />}
+        </Suspense>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }
