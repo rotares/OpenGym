@@ -1,4 +1,5 @@
 import { MUSCLE_QUERIES } from "@/entities/muscle"
+import { usePrivateLayoutContext } from "@/shared/context/private-layout"
 import { CustomSpinner } from "@/shared/ui/components"
 import {
   Button,
@@ -11,9 +12,8 @@ import {
 } from "@/shared/ui/primitives"
 import { useQuery } from "@tanstack/react-query"
 import { ListFilter } from "lucide-react"
-import { memo, useEffect, useState } from "react"
+import { memo } from "react"
 import { type ExerciseFilter } from "../model"
-
 type Props = {
   onChangeFilter: (patch: ExerciseFilter) => void
   onResetFilters: () => void
@@ -21,17 +21,8 @@ type Props = {
 
 export const ExerciseFilterModal = memo(
   ({ onChangeFilter, onResetFilters }: Props) => {
-    const [container, setContainer] = useState<HTMLElement | null>(null)
     const { data: muscleList, isLoading } = useQuery(MUSCLE_QUERIES.list())
-
-    useEffect(() => {
-      const getContainer = async () => {
-        const container = document.querySelector(".main-content-area")
-        if (container) setContainer(container as HTMLElement)
-      }
-      getContainer()
-    }, [])
-
+    const container = usePrivateLayoutContext()
     return (
       <Dialog>
         <DialogTrigger asChild>

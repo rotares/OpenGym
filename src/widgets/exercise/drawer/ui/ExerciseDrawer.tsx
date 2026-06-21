@@ -1,4 +1,5 @@
 import { type ExerciseType } from "@/entities/exercise"
+import { usePrivateLayoutContext } from "@/shared/context/private-layout"
 import { useIsMobile } from "@/shared/lib"
 import { CustomSpinner } from "@/shared/ui/components"
 import {
@@ -10,28 +11,19 @@ import {
   DrawerTrigger,
 } from "@/shared/ui/primitives"
 import { Plus } from "lucide-react"
-import { memo, Suspense, useEffect, useState } from "react"
+import { memo, Suspense, useState } from "react"
 import { type DrawerProps } from "../model"
 import { ExerciseDrawerContentInner } from "./ExerciseDrawerContentInner"
 
 export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
-  const [container, setContainer] = useState<HTMLElement | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const isMobile = useIsMobile()
+  const container = usePrivateLayoutContext()
 
   const handleSelectExercise = (exercise: ExerciseType) => {
     onAdd(exercise)
     setIsOpen(false)
   }
-
-  useEffect(() => {
-    async function getContainer() {
-      const container = document.querySelector(".main-content-area")
-      if (container) setContainer(container as HTMLElement)
-    }
-
-    getContainer()
-  }, [isOpen])
 
   return (
     <Drawer container={container} open={isOpen} onOpenChange={setIsOpen}>
