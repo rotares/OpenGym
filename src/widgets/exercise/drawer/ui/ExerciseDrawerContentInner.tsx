@@ -5,7 +5,6 @@ import {
 } from "@/features/exercise/filters"
 import { SearchInput, useSearch } from "@/features/universal-search"
 import { SortDropdown, useSort } from "@/features/universal-sort"
-import { DrawerHeader, DrawerTitle } from "@/shared/ui/primitives"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import { memo } from "react"
 import { INITIAL_SORT_CONFIG, SORT_OPTIONS } from "../config"
@@ -39,28 +38,25 @@ export const ExerciseDrawerContentInner = memo(({ onAdd }: DrawerProps) => {
 
   return (
     <>
-      <DrawerHeader className="px-0">
-        <DrawerTitle className="mb-3">Выберите упражнение</DrawerTitle>
-        <div className="flex gap-4">
-          <SearchInput
-            placeholder="Поиск упражнений..."
-            value={searchQuery}
-            onChange={setSearchQuery}
-          />
-          <ExerciseFilterModal
-            onChangeFilter={updateFilters}
-            onResetFilters={resetFilters}
-          />
-          <SortDropdown
-            currentSortConfig={currentSortConfig}
-            resetSort={resetSort}
-            onChangeSort={requestSort}
-            sortOptions={SORT_OPTIONS}
-          />
-        </div>
-      </DrawerHeader>
+      <div className="mb-5 flex gap-4">
+        <SearchInput
+          placeholder="Поиск упражнений..."
+          value={searchQuery}
+          onChange={setSearchQuery}
+        />
+        <ExerciseFilterModal
+          onChangeFilter={updateFilters}
+          onResetFilters={resetFilters}
+        />
+        <SortDropdown
+          currentSortConfig={currentSortConfig}
+          resetSort={resetSort}
+          onChangeSort={requestSort}
+          sortOptions={SORT_OPTIONS}
+        />
+      </div>
       <div className="no-scrollbar overflow-y-auto h-full">
-        <ExerciseList itemType="large" onAdd={onAdd} exercises={sortedData!} />
+        <ExerciseList itemType="large" onAdd={onAdd} exercises={sortedData} />
       </div>
     </>
   )

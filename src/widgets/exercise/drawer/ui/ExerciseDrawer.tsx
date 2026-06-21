@@ -5,6 +5,8 @@ import {
   Button,
   Drawer,
   DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
   DrawerTrigger,
 } from "@/shared/ui/primitives"
 import { Plus } from "lucide-react"
@@ -39,6 +41,9 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="mx-auto md:w-[95%] xl:max-w-[1120px] h-[75vh] p-4">
+        <DrawerHeader>
+          <DrawerTitle>Выберите упражнение</DrawerTitle>
+        </DrawerHeader>
         {/* fallback for Exercises */}
         <Suspense fallback={<CustomSpinner />}>
           <ExerciseDrawerContentInner onAdd={handleSelectExercise} />
