@@ -1,8 +1,14 @@
 //мок запросов
-import { authHandlers } from "./authHandlers"
-import { profileHandlers } from "./profileHandlers"
+import { authHandlers } from "./authHandlers";
+import { exerciseHandlers } from "./exerciseHandlers";
+import { musclesHandlers } from './musclesHandler';
+import { profileHandlers } from "./profileHandlers";
+import { userHandlers } from "./userHandlers";
 
 export const handlers = [
   ...authHandlers,
-  ...profileHandlers
+  ...profileHandlers,
+  ...exerciseHandlers,
+  ...musclesHandlers,
+  ...userHandlers
 ]
