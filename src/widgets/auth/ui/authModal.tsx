@@ -11,8 +11,16 @@ export const AuthModal = () => {
     <div className="m-auto">
       <Tabs defaultValue="sign-in" className="gap-5">
         <TabsList variant={"line"} className="flex self-center">
-          <TabsTrigger value="sign-in" children={"Sign In"} />
-          <TabsTrigger value="sign-up" children={"Sign Up"} />
+          <TabsTrigger
+            data-testid="signInTab"
+            value="sign-in"
+            children={"Sign In"}
+          />
+          <TabsTrigger
+            data-testid="signUpTab"
+            value="sign-up"
+            children={"Sign Up"}
+          />
         </TabsList>
 
         <TabsContent value="sign-in" children={<SignInForm />} />
