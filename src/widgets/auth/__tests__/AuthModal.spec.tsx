@@ -1,7 +1,7 @@
 import { renderWithProviders } from "@/tests/TestUtils"
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { AuthModal } from "../ui/AuthModal"
+import { AuthModal } from "../ui/authModal"
 
 describe("Тестирование виджета AuthModal", () => {
   test("табы авторизации и регистрации успешно переключаются", async () => {

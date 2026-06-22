@@ -1,4 +1,4 @@
-import { GuestRoute } from "@/app/router/GuestRoute"
+import { GuestRoute } from "@/app/router/guestRoute"
 import { UserProfilePage } from "@/pages/user"
 import { renderWithProviders } from "@/tests/TestUtils"
 import { screen } from "@testing-library/react"

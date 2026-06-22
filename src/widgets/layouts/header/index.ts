@@ -1,3 +1,2 @@
-export { PrivateHeader } from "./PrivateHeader"
-export { PublicHeader } from "./PublicHeader"
-
+export { PrivateHeader } from "./privateHeader"
+export { PublicHeader } from "./publicHeader"

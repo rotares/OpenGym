@@ -5,8 +5,8 @@ import { PageHeaderLayout, type RouteHandle } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
 import { PrivateLayout } from "../layout/PrivateLayout"
 import { PublicLayout } from "../layout/PublicLayout"
-import { GuestRoute } from "./GuestRoute"
-import { ProtectedRoute } from "./ProtectedRoute"
+import { GuestRoute } from "./guestRoute"
+import { ProtectedRoute } from "./protectedRoute"
 // Lazy loaded pages
 const AuthPage = LazyPage(() => import("@/pages/auth"), "AuthPage")
 
