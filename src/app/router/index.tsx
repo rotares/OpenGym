@@ -1,4 +1,5 @@
 import { HomePage } from "@/pages/home"
+import { ROUTE_PATH } from "@/shared/config/routePath"
 import { LazyPage } from "@/shared/ui/components"
 import { PageHeaderLayout, type RouteHandle } from "@/widgets/layouts"
 import { createBrowserRouter, RouterProvider } from "react-router"
@@ -6,7 +7,6 @@ import { PrivateLayout } from "../layout/PrivateLayout"
 import { PublicLayout } from "../layout/PublicLayout"
 import { GuestRoute } from "./GuestRoute"
 import { ProtectedRoute } from "./ProtectedRoute"
-
 // Lazy loaded pages
 const AuthPage = LazyPage(() => import("@/pages/auth"), "AuthPage")
 
@@ -59,7 +59,7 @@ const routeConfig = createBrowserRouter([
         Component: GuestRoute,
         children: [
           {
-            path: "auth",
+            path: ROUTE_PATH.auth,
             Component: AuthPage,
           },
         ],
@@ -76,7 +76,7 @@ const routeConfig = createBrowserRouter([
             Component: PageHeaderLayout,
             children: [
               {
-                path: "workouts-history",
+                path: ROUTE_PATH.workoutsHistory,
                 children: [
                   {
                     Component: WorkoutsHistoryPage,
@@ -90,10 +90,10 @@ const routeConfig = createBrowserRouter([
               },
               {
                 Component: WorkoutPage,
-                path: "workout-session",
+                path: ROUTE_PATH.workoutSession,
               },
               {
-                path: "exercises",
+                path: ROUTE_PATH.exercises,
                 children: [
                   {
                     index: true,
@@ -113,7 +113,7 @@ const routeConfig = createBrowserRouter([
               },
               {
                 Component: UserProfilePage,
-                path: "profile",
+                path: ROUTE_PATH.profile,
               },
             ],
           },
