@@ -1,7 +1,7 @@
 import { exerciseService } from "@/entities/exercise/api/exercise-service"
 import { useWorkoutStore } from "@/entities/workout"
 import * as useSubmitMutationWorkoutModule from "@/entities/workout/model/useSubmitWorkoutMutation"
-import { USER_MOCK } from "@/tests/mocks/user"
+import { PROFILE_MOCK } from "@/tests/mocks/profile"
 import { renderWithProviders } from "@/tests/TestUtils"
 import { act, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
@@ -10,7 +10,7 @@ import { WorkoutSessionActionsBottomPanel } from "../ui/WorkoutSessionActionsBot
 
 //мок сервисов
 vi.mock("@/entities/user/model/useUser", () => ({
-  useUser: () => USER_MOCK,
+  useUser: () => PROFILE_MOCK,
 }))
 
 import { WorkoutSessionPage } from "../ui/WorkoutSessionPage"
