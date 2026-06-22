@@ -2,11 +2,18 @@ import { HomePage } from "@/pages/home"
 import { ROUTE_PATH } from "@/shared/config/routePath"
 import { LazyPage } from "@/shared/ui/components"
 import { PageHeaderLayout, type RouteHandle } from "@/widgets/layouts"
-import { createBrowserRouter, RouterProvider } from "react-router"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createHashRouter,
+} from "react-router"
 import { PrivateLayout } from "../layout/PrivateLayout"
 import { PublicLayout } from "../layout/PublicLayout"
 import { GuestRoute } from "./guestRoute"
 import { ProtectedRoute } from "./protectedRoute"
+
+const isProduction = import.meta.env.MODE === "production"
+
 // Lazy loaded pages
 const AuthPage = LazyPage(() => import("@/pages/auth"), "AuthPage")
 
@@ -47,7 +54,7 @@ const WorkoutDetailsPage = LazyPage(
   "WorkoutDetailsPage",
 )
 
-const routeConfig = createBrowserRouter([
+const routeConfig = [
   {
     Component: PublicLayout,
     children: [
@@ -129,8 +136,12 @@ const routeConfig = createBrowserRouter([
     path: "*",
     Component: NotFoundPage,
   },
-])
+]
+
+const router = isProduction
+  ? createHashRouter(routeConfig)
+  : createBrowserRouter(routeConfig)
 
 export const AppRouter = () => {
-  return <RouterProvider router={routeConfig} />
+  return <RouterProvider router={router} />
 }
