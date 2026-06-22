@@ -35,7 +35,7 @@ export const SignInForm = () => {
             />
           ))}
           <Field>
-            <Button type="submit" variant={"outline"}>
+            <Button data-testid="loginSubmit" type="submit" variant={"outline"}>
               {isPending ? <Spinner /> : "Sign In !"}
             </Button>
           </Field>
