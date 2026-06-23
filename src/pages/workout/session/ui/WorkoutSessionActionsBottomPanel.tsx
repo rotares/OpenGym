@@ -41,7 +41,11 @@ export const WorkoutSessionActionsBottomPanel = memo(
             </Button>
           </div>
         ) : (
-          <Button className="w-full" onClick={startWorkout}>
+          <Button
+            data-testid="startWorkout"
+            className="w-full"
+            onClick={startWorkout}
+          >
             <Plus />
             <span className="sr-only">Начать тренировку</span>
           </Button>

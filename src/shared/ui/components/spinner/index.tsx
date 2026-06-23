@@ -9,6 +9,7 @@ type Props = {
 export const CustomSpinner = ({ className, children }: Props) => {
   return (
     <div
+      data-testid="spinner"
       className={cn(
         "flex-1 flex items-center justify-center ",
         className,

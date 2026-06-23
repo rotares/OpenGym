@@ -16,6 +16,7 @@ export const WorkoutItem = memo(({ workout, className, onClick }: Props) => {
 
   return (
     <Card
+      data-testid="workoutItem"
       onClick={onClick}
       className={cn(
         "group relative w-full max-h-[250px] h-full mb-5 mx-auto cursor-pointer overflow-hidden rounded-xl shadow-sm",
