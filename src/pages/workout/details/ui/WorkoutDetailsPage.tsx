@@ -71,7 +71,11 @@ export const WorkoutDetailsPage = () => {
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant={"outline"} size={"icon-lg"}>
+                <Button
+                  data-testid="detailsDropdown"
+                  variant={"outline"}
+                  size={"icon-lg"}
+                >
                   <Ellipsis />
                 </Button>
               </DropdownMenuTrigger>
