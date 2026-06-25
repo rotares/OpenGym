@@ -1,0 +1,1 @@
+import{D as e,k as t}from"./index-BXIOEUdL.js";function n(n,r){return e(n,t,r)}export{n as t};
