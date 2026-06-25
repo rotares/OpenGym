@@ -6,6 +6,8 @@ import {
   Spinner,
 } from "@/shared/ui/primitives"
 
+const isProduction = import.meta.env.MODE === "production"
+
 import { DevTool } from "@hookform/devtools"
 import { ArrowLeft } from "lucide-react"
 import { FormProvider, useFormContext } from "react-hook-form"
@@ -43,7 +45,7 @@ export const SignUpForm = () => {
           </FieldSet>
         </form>
       </FormProvider>
-      <DevTool control={control} />
+      {!isProduction && <DevTool control={control} />}
     </>
   )
 }
