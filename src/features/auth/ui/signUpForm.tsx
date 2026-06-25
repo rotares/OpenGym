@@ -13,7 +13,7 @@ import { useSignUpForm } from "../model/forms/useSignUpForm"
 import { SignUpFirstStep, SignUpSecondStep } from "./signUpSteps"
 
 export const SignUpForm = () => {
-  const { isPending, control, errors, onSubmit, methods } = useSignUpForm()
+  const { isPending, errors, onSubmit, methods } = useSignUpForm()
 
   return (
     <>
