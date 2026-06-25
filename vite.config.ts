@@ -5,6 +5,8 @@ import { URL, fileURLToPath } from "url"
 import { defineConfig } from "vite"
 
 // https://vite.dev/config/
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default defineConfig({
   plugins: [
     react(),
@@ -16,4 +18,5 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  base: isProduction ? '/OpenGym/' : '/',
 })

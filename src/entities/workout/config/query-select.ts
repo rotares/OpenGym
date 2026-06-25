@@ -30,7 +30,6 @@ const WORKOUT_LIST_ITEM =
     title,
     duration_minutes,
     finished_at,
-    title,
     total_sets,
     total_volume,
     workout_exercises (

@@ -3,3 +3,5 @@ export const PROFILE_MOCK = {
     "username": "slaze900",
     "created_at": "2026-05-02T15:13:57.168152+00:00"
 }
+
+export const QUERY_URL = `https://bvlitfazwhymyqtzrwyk.supabase.co/rest/v1/profiles`
