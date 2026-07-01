@@ -11,7 +11,7 @@ export interface ThemeStore {
 
 //theme store slice
 const ThemeStoreSlice: StateCreator<ThemeStore> = (set) => ({
-  theme: "system",
+  theme: "dark",
   toggleTheme: () =>
     set((state) => ({ theme: state.theme === "light" ? "dark" : "light" })),
   setTheme: (theme: ThemeType) => set({ theme }),

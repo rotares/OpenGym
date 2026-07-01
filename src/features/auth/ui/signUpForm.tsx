@@ -6,7 +6,6 @@ import {
   Spinner,
 } from "@/shared/ui/primitives"
 
-import { DevTool } from "@hookform/devtools"
 import { ArrowLeft } from "lucide-react"
 import { FormProvider, useFormContext } from "react-hook-form"
 import { Step, Stepper, useStepper } from "rhf-stepper"
@@ -14,7 +13,7 @@ import { useSignUpForm } from "../model/forms/useSignUpForm"
 import { SignUpFirstStep, SignUpSecondStep } from "./signUpSteps"
 
 export const SignUpForm = () => {
-  const { isPending, control, errors, onSubmit, methods } = useSignUpForm()
+  const { isPending, errors, onSubmit, methods } = useSignUpForm()
 
   return (
     <>
@@ -43,7 +42,6 @@ export const SignUpForm = () => {
           </FieldSet>
         </form>
       </FormProvider>
-      <DevTool control={control} />
     </>
   )
 }

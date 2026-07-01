@@ -28,7 +28,11 @@ export const ExerciseDrawer = memo(({ onAdd }: DrawerProps) => {
   return (
     <Drawer container={container} open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline" onClick={() => setIsOpen(true)}>
+        <Button
+          data-testid="addExercise"
+          variant="outline"
+          onClick={() => setIsOpen(true)}
+        >
           {isMobile ? <Plus /> : "Добавить упражнение"}
         </Button>
       </DrawerTrigger>
